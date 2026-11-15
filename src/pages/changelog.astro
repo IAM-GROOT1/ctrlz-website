@@ -1,0 +1,93 @@
+---
+import Base from '../layouts/Base.astro';
+import { marked } from 'marked';
+import { formatDate } from '../lib/release-parse';
+import { fetchedLabel, releases } from '../lib/releases';
+import { site } from '../data/site';
+
+const entries = releases.slice(0, 30).map((release) => {
+  // The release body usually repeats the release title as its first heading.
+  const body = (release.body ?? '').replace(/^\s*#{1,3}\s+[^\n]*\n+/, '');
+
+  return {
+    ...release,
+    version: release.tag.replace(/^v/i, ''),
+    date: formatDate(release.publishedAt),
+    html: marked.parse(body, { async: false, gfm: true }) as string,
+  };
+});
+---
+
+<Base
+  title="Changelog"
+  description="Every CTRL+Z release with its notes, generated from GitHub Releases at build time."
+>
+  <section class="pt-12 pb-8 sm:pt-16">
+    <div class="wrap">
+      <p class="eyebrow">Changelog</p>
+      <h1 class="display mt-5 max-w-3xl text-[clamp(2.8rem,1.4rem+4.6vw,4.75rem)]">
+        Every release, <em class="italic text-accent">as published.</em>
+      </h1>
+      <p class="lede mt-5 max-w-xl">
+        Written in the GitHub release notes and generated for this page when the site is built. A
+        brand-new release appears after the next deploy.
+      </p>
+      <p class="mono mt-5 text-xs text-muted">
+        {entries.length} release{entries.length === 1 ? '' : 's'} · last refreshed {fetchedLabel}
+      </p>
+    </div>
+  </section>
+
+  {entries.length > 0 ? (
+    <section class="wrap pb-20" aria-label="Releases">
+      {entries.map((entry) => (
+        <article class="grid gap-6 border-t border-line py-12 lg:grid-cols-12 lg:gap-10">
+          <div class="lg:col-span-3">
+            <h2 class="font-serif text-[2rem] leading-none tracking-[-0.02em]">
+              <a class="link decoration-transparent hover:decoration-current" href={entry.url}>
+                {entry.version}
+              </a>
+            </h2>
+            <p class="mono mt-3 text-xs text-muted">{entry.date}</p>
+            {entry.prerelease && (
+              <p class="mt-3 inline-block rounded-full border border-line px-2 py-0.5 text-[0.6875rem] text-muted">
+                Pre-release
+              </p>
+            )}
+          </div>
+
+          <div class="lg:col-span-8 lg:col-start-5">
+            <p class="text-[0.9375rem] font-medium text-ink">{entry.name}</p>
+            <div class="release-notes mt-4" set:html={entry.html} />
+            <a class="link mt-5 inline-block text-sm" href={entry.url} rel="noopener noreferrer">
+              View this release on GitHub
+            </a>
+          </div>
+        </article>
+      ))}
+    </section>
+  ) : (
+    <section class="wrap pb-20">
+      <div class="rounded-lg border border-line bg-surface p-8">
+        <h2 class="heading">Release notes are on GitHub</h2>
+        <p class="mt-3 max-w-lg text-sm leading-relaxed text-muted">
+          The release list could not be loaded when this build ran. The canonical changelog is the
+          GitHub releases page, which is always current.
+        </p>
+        <a class="btn btn-accent mt-6" href={site.releases}>
+          Open GitHub Releases
+        </a>
+      </div>
+    </section>
+  )}
+
+  <section class="wrap border-t border-line py-12">
+    <p class="mono text-xs text-muted">
+      Release dates are shown in UTC. Builds are unsigned; see the
+      <a class="link" href="/download">
+        download page
+      </a>{' '}
+      for checksums.
+    </p>
+  </section>
+</Base>
