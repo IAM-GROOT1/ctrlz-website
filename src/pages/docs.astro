@@ -1,0 +1,104 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import { site } from '../data/site';
+
+const entries = (await getCollection('docs')).sort((a, b) => a.data.order - b.data.order);
+
+const sections = await Promise.all(
+  entries.map(async (entry) => ({
+    id: entry.id.replace(/\.md$/, ''),
+    title: entry.data.title,
+    summary: entry.data.summary,
+    Content: (await render(entry)).Content,
+  })),
+);
+---
+
+<Base
+  title="Docs"
+  description="How CTRL+Z works, how to build and contribute to it, and how it is licensed."
+>
+  <section class="pt-12 pb-10 sm:pt-16">
+    <div class="wrap">
+      <p class="eyebrow">Documentation</p>
+      <h1 class="display mt-5 max-w-3xl text-[clamp(2.8rem,1.4rem+4.6vw,4.75rem)]">
+        How it works, <em class="italic text-accent">and how to help.</em>
+      </h1>
+      <p class="lede mt-5 max-w-xl">
+        The app is small enough to read in an afternoon. This page covers the parts worth knowing
+        before you rely on it or change it.
+      </p>
+      <p class="mono mt-5 text-xs text-muted">
+        Source:{' '}
+        <a class="link" href={site.repo}>
+          {site.repoName}
+        </a>{' '}
+        · MIT
+      </p>
+    </div>
+  </section>
+
+  <div class="wrap grid gap-12 pb-16 lg:grid-cols-12 lg:gap-16">
+    <nav class="lg:col-span-3" aria-label="On this page">
+      <div class="sticky top-24">
+        <p class="eyebrow">On this page</p>
+        <ul class="mt-4 grid gap-2.5">
+          {sections.map((section) => (
+            <li>
+              <a
+                class="text-sm text-muted transition-colors hover:text-ink"
+                href={`#${section.id}`}
+              >
+                {section.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div class="mt-8 border-t border-line pt-6">
+          <a class="text-sm text-muted transition-colors hover:text-ink" href={site.repo}>
+            Source code
+          </a>
+          <a
+            class="mt-2 block text-sm text-muted transition-colors hover:text-ink"
+            href={site.releases}
+          >
+            Releases
+          </a>
+          <a
+            class="mt-2 block text-sm text-muted transition-colors hover:text-ink"
+            href={site.issues}
+          >
+            Issues
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="lg:col-span-8 lg:col-start-5">
+      {sections.map((section) => (
+        <section
+          id={section.id}
+          class="scroll-mt-24 border-t border-line pt-10 pb-12 first:border-0 first:pt-0"
+        >
+          <h2 class="title text-[clamp(1.75rem,1.3rem+1.4vw,2.5rem)]">{section.title}</h2>
+          {section.summary && <p class="mt-3 max-w-xl text-sm text-muted">{section.summary}</p>}
+          <div class="prose mt-8">
+            <section.Content />
+          </div>
+        </section>
+      ))}
+
+      <div class="mt-4 rounded-lg border border-dashed border-line p-7">
+        <p class="eyebrow">Placeholder</p>
+        <h2 class="heading mt-3">Pro and pricing</h2>
+        <p class="mt-3 max-w-lg text-sm leading-relaxed text-muted">
+          A Pro tier is being considered for people who want to support the project. Nothing is for
+          sale today, no build contains licence checks, and this space is reserved for a future
+          <span class="mono text-[0.8125rem] text-ink">/pro</span> page. It will be written here
+          first when it is real.
+        </p>
+      </div>
+    </div>
+  </div>
+</Base>
