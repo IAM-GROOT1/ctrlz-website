@@ -59,9 +59,9 @@ Set `GITHUB_TOKEN` (read-only) in CI or Cloudflare to raise the anonymous rate l
 
 ## Screenshots
 
-Four placeholder slots are waiting for real captures. See
-[`docs/SCREENSHOTS.md`](docs/SCREENSHOTS.md) for exact sizes, themes and capture guidance. Drop a
-file into `src/assets/screenshots/<name>.png` and the placeholder disappears.
+Real captures of the app are in `src/assets/screenshots/` and used on the home page. To replace or
+add one, see [`docs/SCREENSHOTS.md`](docs/SCREENSHOTS.md) — the `Screenshot` component swaps a
+placeholder for a real image as soon as a matching file exists.
 
 ## Deployment (Cloudflare Pages)
 

@@ -37,6 +37,11 @@ const capture = Object.entries(captures).find(([path]) => {
   const file = path.split('/').pop() ?? '';
   return file.replace(/\.[^.]+$/, '') === name;
 })?.[1]?.default;
+
+// Never request widths larger than the source: that only produces upscales.
+const widths = capture
+  ? [...new Set([480, 720, 960, 1180].filter((candidate) => candidate <= capture.width))]
+  : [];
 ---
 
 <figure class:list={['not-prose', className]}>
@@ -45,12 +50,12 @@ const capture = Object.entries(captures).find(([path]) => {
       <Picture
         src={capture}
         alt={alt}
-        widths={[480, 720, 960, 1280, 1600]}
+        widths={widths.length > 0 ? widths : undefined}
         sizes={sizes}
         formats={['avif', 'webp']}
         loading={priority ? 'eager' : 'lazy'}
         fetchpriority={priority ? 'high' : 'auto'}
-        decoding={priority ? 'sync' : 'async'}
+        decoding="async"
         quality={82}
       />
     ) : (
