@@ -10,7 +10,15 @@ const year = new Date().getFullYear();
   <div class="wrap grid gap-12 py-16 sm:grid-cols-2 md:grid-cols-[1.6fr_1fr_1fr]">
     <div class="max-w-xs">
       <a href="/" class="flex items-center gap-2.5" aria-label={`${site.name} — home`}>
-        <Image src={mark} alt="" width={26} height={26} class="size-[26px] rounded-[6px]" />
+        <Image
+          src={mark}
+          alt=""
+          width={26}
+          height={26}
+          widths={[26, 52, 78]}
+          sizes="26px"
+          class="size-[26px] rounded-[6px]"
+        />
         <span class="text-[0.9375rem] font-semibold">{site.name}</span>
       </a>
       <p class="mt-4 text-sm leading-relaxed text-muted">{site.tagline}</p>
