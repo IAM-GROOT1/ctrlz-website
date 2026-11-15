@@ -10,10 +10,12 @@ const SOURCE = 'src/assets/brand/mark-1024.png';
 const OUTPUT = 'public';
 
 const png = (size) =>
-  sharp(SOURCE).resize(size, size, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } }).png({
-    compressionLevel: 9,
-    palette: size <= 64,
-  });
+  sharp(SOURCE)
+    .resize(size, size, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .png({
+      compressionLevel: 9,
+      palette: size <= 64,
+    });
 
 /** Windows .ico containing PNG-compressed frames (supported since Vista). */
 function buildIco(frames) {
