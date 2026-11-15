@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CTRL+Z share card</title>
+    <style>
+      @font-face {
+        font-family: 'Instrument Serif';
+        font-style: normal;
+        font-weight: 400;
+        src: url('/fonts/instrument-serif.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Instrument Serif';
+        font-style: italic;
+        font-weight: 400;
+        src: url('/fonts/instrument-serif-italic.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400 700;
+        src: url('/fonts/inter-var.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'JetBrains Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: url('/fonts/jetbrains-mono-400.woff2') format('woff2');
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+      }
+
+      body {
+        background: #f6f4f0;
+        color: #1b1714;
+        font-family: 'Inter', sans-serif;
+        position: relative;
+        padding: 60px 72px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        z-index: 2;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-weight: 600;
+        font-size: 19px;
+        letter-spacing: 0.01em;
+      }
+
+      .brand img {
+        width: 44px;
+        height: 44px;
+        border-radius: 11px;
+      }
+
+      .domain {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        color: #6a615a;
+      }
+
+      .middle {
+        position: relative;
+        z-index: 2;
+        max-width: 720px;
+      }
+
+      .dash {
+        display: block;
+        width: 56px;
+        height: 9px;
+        border-radius: 999px;
+        background: #ce5228;
+        margin-bottom: 26px;
+      }
+
+      h1 {
+        font-family: 'Instrument Serif', serif;
+        font-weight: 400;
+        font-size: 112px;
+        line-height: 0.9;
+        letter-spacing: -0.025em;
+      }
+
+      h1 em {
+        font-style: italic;
+        color: #ce5228;
+      }
+
+      p.sub {
+        font-size: 24px;
+        line-height: 1.4;
+        color: #6a615a;
+        max-width: 610px;
+        margin-top: 20px;
+      }
+
+      .bottom {
+        display: flex;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+      }
+
+      .meta {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #6a615a;
+        white-space: nowrap;
+      }
+
+      .rule {
+        flex: 1;
+        height: 1px;
+        background: #e2dad0;
+        margin: 0 26px;
+      }
+
+      .ember {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #ce5228;
+        display: inline-block;
+        margin-right: 10px;
+        vertical-align: 1px;
+      }
+
+      .appicon {
+        position: absolute;
+        right: 84px;
+        top: 50%;
+        transform: translateY(-50%) rotate(-4deg);
+        width: 232px;
+        height: 232px;
+        border-radius: 54px;
+        box-shadow:
+          0 2px 4px rgba(27, 23, 20, 0.08),
+          0 30px 60px -20px rgba(27, 23, 20, 0.35);
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top">
+      <div class="brand">
+        <img src="/icon-192.png" alt="" />
+        <span>CTRL+Z</span>
+      </div>
+      <span class="domain">ctrlz.download</span>
+    </div>
+
+    <div class="middle">
+      <span class="dash"></span>
+      <h1>Undo a<br /><em>clean install.</em></h1>
+      <p class="sub">
+        Reinstall your apps and restore your Chromium and Firefox profiles after Windows is
+        reinstalled.
+      </p>
+    </div>
+
+    <div class="bottom">
+      <span class="meta"><span class="ember"></span>Windows 10 &amp; 11 · free · open source</span>
+      <span class="rule"></span>
+      <span class="meta">apps · browsers</span>
+    </div>
+
+    <img class="appicon" src="/icon-512.png" alt="" />
+  </body>
+</html>
