@@ -63,10 +63,10 @@ export const apps = {
   screenshot: {
     name: 'add-app',
     label: 'Add app — direct URL, GitHub release, local installer',
-    width: 1280,
-    height: 860,
-    theme: 'Light and dark',
-    alt: 'The CTRL+Z add-app dialog with fields for a direct download URL, a GitHub repository and a local installer.',
+    width: 1180,
+    height: 760,
+    theme: 'App capture',
+    alt: 'The CTRL+Z Add app screen, with direct link, GitHub release and local file sources and a silent install panel.',
   },
 } as const;
 
@@ -75,6 +75,14 @@ export const catalog = {
   title: 'The Chris Titus app catalogue is built in.',
   body: 'Browse and add what Chris Titus Tech’s WinUtil recommends. An offline snapshot ships with the app, and the catalogue refreshes from the public repository when you ask it to.',
   link: { label: 'How the catalogue works', href: '/docs#catalogue' },
+  screenshot: {
+    name: 'catalog',
+    label: 'Catalog — recommended WinUtil apps',
+    width: 1180,
+    height: 760,
+    theme: 'App capture',
+    alt: 'The CTRL+Z catalog listing recommended apps with their winget package ids and categories.',
+  },
 } as const;
 
 export const browsers = {
@@ -94,9 +102,9 @@ export const browsers = {
   screenshot: {
     name: 'browser-restore',
     label: 'Browser restore — archive, profiles, target browser',
-    width: 1440,
-    height: 900,
-    theme: 'Light and dark',
+    width: 1180,
+    height: 760,
+    theme: 'App capture',
     alt: 'The CTRL+Z browser restore screen, listing an archive’s profiles and asking for a target browser.',
   },
 } as const;
@@ -105,14 +113,6 @@ export const resumable = {
   eyebrow: 'Resumable installs',
   title: 'A reboot shouldn’t restart the queue.',
   body: 'Progress is written as it happens. If an installer asks for a restart, or one app fails, CTRL+Z isolates it and carries on — then resumes at the next unfinished app when you come back.',
-  screenshot: {
-    name: 'install-progress',
-    label: 'Install queue — per-app status and live log',
-    width: 1280,
-    height: 800,
-    theme: 'Light and dark',
-    alt: 'The CTRL+Z install queue showing per-app progress, statuses and a live log.',
-  },
 } as const;
 
 export const portableProfiles = {
@@ -152,9 +152,9 @@ export const screenshotSlots = [
   {
     name: 'myapps',
     label: 'App list — the hero shot',
-    width: 1600,
-    height: 1000,
-    theme: 'Light (primary) + dark',
+    width: 1180,
+    height: 760,
+    theme: 'App capture',
     alt: 'The CTRL+Z app list showing installed apps matched to winget packages.',
   },
 ] as const;

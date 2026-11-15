@@ -189,35 +189,49 @@ const jsonLd = {
 
   <!-- Catalogue ------------------------------------------------------------->
   <section class="section rule">
-    <div class="wrap grid gap-8 lg:grid-cols-12 lg:items-end">
-      <div class="lg:col-span-8">
-        <p class="eyebrow">{catalog.eyebrow}</p>
-        <h2 class="mt-5 max-w-2xl font-serif text-[clamp(2.2rem,1.2rem+3.4vw,4rem)] leading-[1] tracking-[-0.02em]">
-          {catalog.title}
-        </h2>
-      </div>
-      <div class="lg:col-span-4">
-        <p class="text-[0.9375rem] leading-relaxed text-muted">{catalog.body}</p>
-        <a
-          href={catalog.link.href}
-          class="group mt-6 inline-flex items-center gap-2 text-sm font-medium"
-        >
-          {catalog.link.label}
-          <svg
-            viewBox="0 0 16 16"
-            class="size-3.5 transition-transform duration-200 group-hover:translate-x-1"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.4"
-            aria-hidden="true"
+    <div class="wrap">
+      <div class="grid gap-8 lg:grid-cols-12 lg:items-end">
+        <div class="lg:col-span-8">
+          <p class="eyebrow">{catalog.eyebrow}</p>
+          <h2 class="mt-5 max-w-2xl font-serif text-[clamp(2.2rem,1.2rem+3.4vw,4rem)] leading-[1] tracking-[-0.02em]">
+            {catalog.title}
+          </h2>
+        </div>
+        <div class="lg:col-span-4">
+          <p class="text-[0.9375rem] leading-relaxed text-muted">{catalog.body}</p>
+          <a
+            href={catalog.link.href}
+            class="group mt-6 inline-flex items-center gap-2 text-sm font-medium"
           >
-            <path
-              d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-          </svg>
-        </a>
+            {catalog.link.label}
+            <svg
+              viewBox="0 0 16 16"
+              class="size-3.5 transition-transform duration-200 group-hover:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.4"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="mt-12 lg:mt-16 lg:ml-auto lg:w-[84%]" data-reveal>
+        <Screenshot
+          name={catalog.screenshot.name}
+          label={catalog.screenshot.label}
+          alt={catalog.screenshot.alt}
+          width={catalog.screenshot.width}
+          height={catalog.screenshot.height}
+          theme={catalog.screenshot.theme}
+          sizes="(min-width: 1024px) 900px, 100vw"
+        />
       </div>
     </div>
   </section>
@@ -266,21 +280,9 @@ const jsonLd = {
         <p class="eyebrow">{resumable.eyebrow}</p>
         <h2 class="title mt-5 max-w-sm">{resumable.title}</h2>
         <p class="lede mt-5 max-w-md">{resumable.body}</p>
-
-        <div class="mt-10">
-          <Screenshot
-            name={resumable.screenshot.name}
-            label={resumable.screenshot.label}
-            alt={resumable.screenshot.alt}
-            width={resumable.screenshot.width}
-            height={resumable.screenshot.height}
-            theme={resumable.screenshot.theme}
-            sizes="(min-width: 1024px) 520px, 100vw"
-          />
-        </div>
       </div>
 
-      <div class="lg:pt-24" data-reveal style="--reveal-delay: 100ms">
+      <div data-reveal style="--reveal-delay: 100ms">
         <p class="eyebrow">{portableProfiles.eyebrow}</p>
         <h2 class="title mt-5 max-w-sm">{portableProfiles.title}</h2>
         <p class="lede mt-5 max-w-md">{portableProfiles.body}</p>

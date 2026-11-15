@@ -1,32 +1,43 @@
-# Screenshots I still need
+# Screenshots
 
-The site already renders clearly labelled placeholder slots. Drop a real capture at the file
-path below and it replaces the placeholder automatically — no component changes. The `Screenshot`
-component checks `src/assets/screenshots/<name>.<ext>` (`.png`, `.jpg`, `.webp` or `.avif`).
+The site ships with **real captures of the app**, taken from the app repository's
+`docs/screenshots/` folder (the same images the app's README uses). They are 1180 × 760 and live in
+`src/assets/screenshots/`:
 
-| #   | File                                          | Size            | Theme                                                                   | What it should show                                                                                                                                                              |
-| --- | --------------------------------------------- | --------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | `src/assets/screenshots/myapps.png`           | **1600 × 1000** | Light (primary). A dark variant is welcome but the hero uses one image. | **My Apps** after a scan: the app list with matched and unmatched entries, the toolbar, and the status strip. This is the hero image, so make it the most representative screen. |
-| 2   | `src/assets/screenshots/add-app.png`          | **1280 × 860**  | Light and dark both welcome; one file is used.                          | The **Add App** dialog with the source choices visible (winget, GitHub release, direct URL, local installer) and the silent-switch preview.                                      |
-| 3   | `src/assets/screenshots/browser-restore.png`  | **1440 × 900**  | Light and dark both welcome; one file is used.                          | **Browsers → Restore**: an inspected archive with its profiles listed and the target-browser choice.                                                                             |
-| 4   | `src/assets/screenshots/install-progress.png` | **1280 × 800**  | Light and dark both welcome; one file is used.                          | **Install** during a run: per-app status, the progress bar and the live log visible.                                                                                             |
+| File                  | Used on                            | Shows                                                                  |
+| --------------------- | ---------------------------------- | ---------------------------------------------------------------------- |
+| `myapps.png`          | Home hero                          | My Apps: the scanned app list, matched packages and install methods    |
+| `add-app.png`         | Home, “If it can install silently” | Add app: direct link, GitHub release, local file, silent-install panel |
+| `catalog.png`         | Home, catalogue                    | Catalog: recommended WinUtil apps by category, with winget ids         |
+| `browser-restore.png` | Home, browser backup               | Browsers → Restore: archive, profiles inside, target browser           |
 
-## How to capture them well
+The build converts each to AVIF and WebP at several widths; nothing is served at its full size.
+Never upscale a replacement — supply at least 1180 px wide.
 
-- Use a VM or a test Windows account with neutral app data. No personal bookmarks, names, file
-  paths, emails or product keys anywhere in frame.
-- Capture the app window only — no desktop wallpaper, no taskbar, no browser chrome.
-- Set display scaling to **100%** so the UI is crisp at the pixel sizes above. If you capture at
-  200%, supply double resolution (for example 3200 × 2000 for the hero) and the image will be
-  downscaled cleanly.
-- Take light-theme captures on a light Windows theme and dark on a dark one, so window chrome
-  matches the app.
-- PNG is best for UI. Optimisation to AVIF/WebP happens at build time.
-- Keep the app at its default window size; don't stretch it to fill 1600 px if that adds empty
-  space. A slightly narrower capture is fine — the frame is not pixel-exact.
+## Replacing or adding a capture
 
-## Files you do not need to provide
+1. Save a PNG/WebP/AVIF into `src/assets/screenshots/`.
+2. Name it to match the slot (`myapps`, `add-app`, `browser-restore`), or pass a new `name` to the
+   `Screenshot` component.
+3. If the aspect ratio changes, update the `width`/`height` values in `src/data/home.ts` — they
+   only size the placeholder, but keeping them honest keeps the docs honest.
 
-- Logo and app icon: taken from the app repository's `branding/` folder.
-- Open Graph image: generated from `scripts/og-template.html` into `public/og.png`.
-- Favicons: generated from the same mark by `pnpm assets`.
+The component picks up any file whose base name matches, so a placeholder disappears the moment a
+real image exists.
+
+## Optional future captures
+
+These would make good additions, not fixes:
+
+- **Install queue during a run** — per-app status, progress bar and live log. The resumable-installs
+  section currently carries no image because no public capture of that screen exists.
+- **Light-theme variants** — the shipped captures are dark; they sit inside the light theme
+  perfectly well, but a light set would match the app's light mode.
+
+## Capture guidance, if you shoot new ones
+
+- Use a VM or test Windows account. No personal bookmarks, names, paths, emails or product keys.
+- Window only — no desktop wallpaper, taskbar or browser chrome.
+- 100% display scaling for crisp pixels; at 200%, capture double resolution.
+- Match the app theme to the Windows theme you are shooting in, so the title bar matches.
+- PNG for UI; optimisation happens at build time.
