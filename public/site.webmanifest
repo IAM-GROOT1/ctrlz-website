@@ -1,0 +1,14 @@
+{
+  "name": "CTRL+Z",
+  "short_name": "CTRL+Z",
+  "description": "Rebuild a Windows PC after a clean install: reinstall apps and restore Chromium and Firefox profiles.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#f6f4f0",
+  "theme_color": "#f6f4f0",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page not found" description="This page does not exist." noindex>
+  <section class="wrap flex min-h-[62vh] flex-col justify-center py-20">
+    <p class="eyebrow">404</p>
+    <h1 class="display mt-5 max-w-2xl text-[clamp(2.5rem,1.4rem+4vw,4.25rem)]">
+      This page <em class="italic text-accent">doesn’t exist.</em>
+    </h1>
+    <p class="lede mt-5 max-w-md">
+      The link may be old, or the page moved. Everything real is one step away.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a class="btn btn-accent" href="/">
+        Go home
+      </a>
+      <a class="btn btn-quiet" href="/download">
+        Download CTRL+Z
+      </a>
+      <a class="btn btn-ghost" href="/docs">
+        Read the docs
+      </a>
+    </div>
+  </section>
+</Base>

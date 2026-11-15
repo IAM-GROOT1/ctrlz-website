@@ -1,0 +1,360 @@
+---
+import Base from '../layouts/Base.astro';
+import { checksumsAsset, downloads, fetchedLabel, version } from '../lib/releases';
+import { site } from '../data/site';
+
+const title = 'Download';
+const description = version
+  ? `Download CTRL+Z ${version.version} for Windows 10 and 11 (x64). Installer and portable builds with SHA-256 checksums.`
+  : 'Download CTRL+Z for Windows 10 and 11 (x64). Installer and portable builds with SHA-256 checksums.';
+
+const installerName = version?.installer?.fileName ?? 'CTRL+Z-Setup.exe';
+const verifyCommand = `Get-FileHash .\\${installerName} -Algorithm SHA256`;
+---
+
+<Base title={title} description={description}>
+  <div data-release data-build-tag={version?.tag ?? ''}>
+    <section class="pt-12 pb-16 sm:pt-16 lg:pb-24">
+      <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <div class="lg:col-span-7">
+          <p class="eyebrow">Download</p>
+          <h1 class="display mt-5 text-[clamp(2.8rem,1.4rem+4.6vw,4.75rem)]">
+            Get <em class="italic text-accent">CTRL+Z.</em>
+          </h1>
+          <p class="lede mt-5 max-w-lg">
+            One download for Windows 10 and 11, x64. Install it, or run the portable exe from a USB
+            stick.
+          </p>
+
+          {version ? (
+            <p class="mono mt-6 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs text-muted">
+              <span data-release-version>v{version.version}</span>
+              <span aria-hidden="true">·</span>
+              <span>released {version.publishedLabel}</span>
+              <span aria-hidden="true">·</span>
+              <a class="link" href={version.url}>
+                release notes
+              </a>
+            </p>
+          ) : (
+            <p class="mono mt-6 text-xs text-muted">
+              No release data available in this build — see the releases page on GitHub.
+            </p>
+          )}
+
+          {downloads.length > 0 ? (
+            <div class="mt-10 divide-y divide-line border-y border-line">
+              {downloads.map((download, index) => (
+                <div class="flex flex-col gap-5 py-7 sm:flex-row sm:items-start sm:justify-between sm:gap-8">
+                  <div class="min-w-0">
+                    <div class="flex flex-wrap items-center gap-2.5">
+                      <h2 class="text-[1.0625rem] font-semibold tracking-[-0.01em]">
+                        {download.label}
+                      </h2>
+                      {index === 0 && (
+                        <span class="rounded-full border border-line px-2 py-0.5 text-[0.6875rem] font-medium text-muted">
+                          Recommended
+                        </span>
+                      )}
+                      <span class="mono text-xs text-muted" data-asset-size={download.kind}>
+                        {download.size}
+                      </span>
+                    </div>
+                    <p class="mt-1.5 text-sm text-muted">{download.description}</p>
+                    <p
+                      class="mono mt-2 truncate text-[0.6875rem] text-muted"
+                      data-asset-name={download.kind}
+                    >
+                      {download.fileName}
+                    </p>
+
+                    {download.checksum ? (
+                      <div class="mt-3">
+                        <p class="mono text-[0.625rem] uppercase tracking-[0.14em] text-muted">
+                          SHA-256
+                        </p>
+                        <div class="mt-1 flex items-start gap-2">
+                          <code
+                            class="mono break-all text-[0.6875rem] leading-relaxed text-muted"
+                            data-asset-sha={download.kind}
+                          >
+                            {download.checksum}
+                          </code>
+                          <button
+                            type="button"
+                            class="mono shrink-0 rounded border border-line px-1.5 py-0.5 text-[0.625rem] text-muted transition-colors hover:border-ink/30 hover:text-ink"
+                            data-copy={download.checksum}
+                            data-asset-copy={download.kind}
+                            aria-label={`Copy the SHA-256 checksum for the ${download.label}`}
+                          >
+                            <span data-copy-label>Copy</span>
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <p class="mono mt-3 text-[0.6875rem] text-muted">
+                        No checksum published for this asset.
+                      </p>
+                    )}
+                  </div>
+
+                  <a
+                    href={download.url}
+                    class="btn btn-accent shrink-0 self-start"
+                    data-asset-url={download.kind}
+                    download
+                  >
+                    Download
+                  </a>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div class="mt-10 rounded-lg border border-line bg-surface p-6">
+              <p class="text-sm text-muted">
+                Release data could not be loaded. The downloads are still on GitHub.
+              </p>
+              <a class="btn btn-quiet mt-4" href={site.releases}>
+                Open the releases page
+              </a>
+            </div>
+          )}
+
+          <p class="mt-4 text-xs text-muted" data-newer-note hidden>
+            A newer release is available. This page was built before it was published —{' '}
+            <a class="link" data-newer-link href={site.releases}>
+              see the latest release
+            </a>
+            .
+          </p>
+
+          {downloads.length > 0 && (
+            <p class="mt-4 text-xs leading-relaxed text-muted">
+              Checksums come from the release assets themselves. A{' '}
+              <a
+                class="link"
+                href={checksumsAsset?.downloadUrl ?? site.releases}
+                data-checksums-link
+              >
+                SHA256SUMS.txt
+              </a>{' '}
+              file is published with every release.
+            </p>
+          )}
+        </div>
+
+        <aside class="lg:col-span-4 lg:col-start-9">
+          <div class="rounded-lg border border-line bg-surface p-6">
+            <h2 class="eyebrow">System requirements</h2>
+            <ul class="mt-4 grid gap-3 text-sm text-muted">
+              <li class="flex gap-2.5">
+                <span class="mt-2 h-px w-3 shrink-0 bg-accent" aria-hidden="true"></span>
+                Windows 10 version 1809 or newer, or Windows 11
+              </li>
+              <li class="flex gap-2.5">
+                <span class="mt-2 h-px w-3 shrink-0 bg-accent" aria-hidden="true"></span>
+                x64 processor
+              </li>
+              <li class="flex gap-2.5">
+                <span class="mt-2 h-px w-3 shrink-0 bg-accent" aria-hidden="true"></span>
+                No .NET runtime install — the exe is self-contained
+              </li>
+              <li class="flex gap-2.5">
+                <span class="mt-2 h-px w-3 shrink-0 bg-accent" aria-hidden="true"></span>
+                Administrator prompt only to install silently or use Volume Shadow Copy
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-4 rounded-lg border border-line p-6">
+            <h2 class="eyebrow">Data location</h2>
+            <div class="mt-4 text-sm leading-relaxed text-muted">
+              <p>Profiles, logs and settings live in:</p>
+              <code class="mono mt-2 block rounded border border-line bg-canvas px-2.5 py-1.5 text-[0.75rem] text-ink">
+                %LOCALAPPDATA%\CTRL+Z
+              </code>
+              <p class="mt-3">
+                Create an empty <code class="mono text-[0.75rem] text-ink">portable.flag</code> next
+                to the exe to keep everything in a{' '}
+                <code class="mono text-[0.75rem] text-ink">Data</code> folder beside it instead.
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-4 rounded-lg border border-line p-6">
+            <h2 class="eyebrow">Package managers</h2>
+            <p class="mt-4 text-sm leading-relaxed text-muted">
+              There is no winget package for CTRL+Z yet. The installer and the portable exe are the
+              supported downloads.
+            </p>
+            <a class="link mt-3 inline-block text-sm" href={site.releases}>
+              All releases on GitHub
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Verify ------------------------------------------------------------->
+    <section class="section rule">
+      <div class="wrap grid gap-10 lg:grid-cols-12 lg:items-start">
+        <div class="lg:col-span-5">
+          <p class="eyebrow">Verify</p>
+          <h2 class="title mt-5">Check the file you got.</h2>
+          <p class="mt-5 max-w-md text-[0.9375rem] leading-relaxed text-muted">
+            Compute the SHA-256 of the downloaded exe and compare it with the checksum above. If
+            they differ, delete the file and download it again.
+          </p>
+          <p class="mt-4 max-w-md text-[0.9375rem] leading-relaxed text-muted">
+            Prefer not to trust a binary at all? The source builds with the .NET 8 SDK —
+            <a class="link" href={site.repo}>
+              the instructions are in the repository
+            </a>
+            .
+          </p>
+        </div>
+
+        <div class="lg:col-span-6 lg:col-start-7">
+          <div class="overflow-hidden rounded-lg border border-line bg-surface">
+            <div class="flex items-center justify-between border-b border-line px-4 py-2.5">
+              <span class="mono text-xs text-muted">PowerShell</span>
+              <button
+                type="button"
+                class="mono rounded border border-line px-1.5 py-0.5 text-[0.625rem] text-muted transition-colors hover:border-ink/30 hover:text-ink"
+                data-copy={verifyCommand}
+                aria-label="Copy the verification command"
+              >
+                <span data-copy-label>Copy</span>
+              </button>
+            </div>
+            <pre class="overflow-x-auto p-4 font-mono text-[0.75rem] leading-relaxed"><code>{verifyCommand}</code></pre>
+          </div>
+          <p class="mono mt-3 text-[0.6875rem] text-muted">
+            Windows PowerShell 5.1 and PowerShell 7 both include Get-FileHash.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SmartScreen -------------------------------------------------------->
+    <section class="section border-y border-line bg-surface">
+      <div class="wrap grid gap-10 lg:grid-cols-12">
+        <div class="lg:col-span-7">
+          <p class="eyebrow">SmartScreen</p>
+          <h2 class="title mt-5">Windows will probably warn you.</h2>
+          <p class="mt-5 max-w-xl text-[0.9375rem] leading-relaxed text-muted">
+            The builds are not code-signed, so a fresh download shows a{' '}
+            <em class="not-italic text-ink">“Windows protected your PC”</em> prompt from an unknown
+            publisher. That is what Windows says about any unsigned binary, including honest ones.
+          </p>
+          <p class="mt-4 max-w-xl text-[0.9375rem] leading-relaxed text-muted">
+            Click <em class="not-italic text-ink">More info</em> and check the publisher and file
+            name before choosing <em class="not-italic text-ink">Run anyway</em>. Verify the
+            checksum first if you want certainty. Code signing is on the roadmap.
+          </p>
+        </div>
+        <div class="lg:col-span-4 lg:col-start-9 lg:pt-16">
+          <div class="border-l-2 border-accent pl-5">
+            <p class="text-sm font-semibold">Do not run a file whose checksum does not match.</p>
+            <p class="mt-2 text-sm leading-relaxed text-muted">
+              A mismatched hash means the download was altered or corrupted in transit. Download it
+              again, or build from source.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap py-12">
+      <p class="mono text-xs text-muted">
+        Release data last refreshed {fetchedLabel}. The page updates itself when a newer release is
+        published.
+      </p>
+    </section>
+  </div>
+
+  <script>
+    const container = document.querySelector<HTMLElement>('[data-release]');
+    const buildTag = container?.getAttribute('data-build-tag');
+
+    const formatBytes = (bytes: number) => {
+      if (!Number.isFinite(bytes) || bytes <= 0) return '—';
+      const units = ['B', 'KB', 'MB', 'GB'];
+      const exponent = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1);
+      return `${(bytes / 1024 ** exponent).toFixed(exponent === 0 ? 0 : 1)} ${units[exponent]}`;
+    };
+
+    const checksumOf = (asset: { digest?: string | null } | undefined) => {
+      const match = asset?.digest ? /^sha256:([a-f0-9]{64})$/i.exec(asset.digest.trim()) : null;
+      return match ? match[1].toUpperCase() : null;
+    };
+
+    const applyAsset = (kind: string, asset: Record<string, unknown> | undefined) => {
+      if (!asset) return;
+      const name = String(asset.name ?? '');
+      const size = Number(asset.size ?? 0);
+      const url = String(asset.browser_download_url ?? '');
+      const sha = checksumOf(asset as { digest?: string | null });
+
+      document
+        .querySelectorAll<HTMLAnchorElement>(`[data-asset-url="${kind}"]`)
+        .forEach((element) => {
+          if (url) element.href = url;
+        });
+      document.querySelectorAll<HTMLElement>(`[data-asset-name="${kind}"]`).forEach((element) => {
+        if (name) element.textContent = name;
+      });
+      document.querySelectorAll<HTMLElement>(`[data-asset-size="${kind}"]`).forEach((element) => {
+        if (size) element.textContent = formatBytes(size);
+      });
+      document.querySelectorAll<HTMLElement>(`[data-asset-sha="${kind}"]`).forEach((element) => {
+        if (sha) element.textContent = sha;
+      });
+      document
+        .querySelectorAll<HTMLButtonElement>(`[data-asset-copy="${kind}"]`)
+        .forEach((button) => {
+          if (sha) button.dataset.copy = sha;
+        });
+    };
+
+    if (buildTag) {
+      fetch('https://api.github.com/repos/IAM-GROOT1/ctrlz/releases/latest', {
+        headers: { Accept: 'application/vnd.github+json' },
+      })
+        .then((response) => (response.ok ? response.json() : null))
+        .then((release) => {
+          if (!release?.tag_name || release.draft) return;
+
+          const assets: Array<Record<string, unknown>> = release.assets ?? [];
+          const findAsset = (pattern: RegExp) =>
+            assets.find((asset) => pattern.test(String(asset.name)));
+
+          const installer = findAsset(/setup|installer/i);
+          const portable = findAsset(/portable/i);
+          const checksums = findAsset(/sha256/i);
+
+          applyAsset('installer', installer);
+          applyAsset('portable', portable);
+
+          const checksumsLink = document.querySelector<HTMLAnchorElement>('[data-checksums-link]');
+          if (checksumsLink && checksums)
+            checksumsLink.href = String(checksums.browser_download_url);
+
+          if (release.tag_name !== buildTag) {
+            const version = String(release.tag_name).replace(/^v/i, '');
+            document.querySelectorAll<HTMLElement>('[data-release-version]').forEach((element) => {
+              element.textContent = `v${version}`;
+            });
+
+            const note = document.querySelector<HTMLElement>('[data-newer-note]');
+            const link = document.querySelector<HTMLAnchorElement>('[data-newer-link]');
+            if (note) note.hidden = false;
+            if (link && release.html_url) link.href = release.html_url;
+          }
+        })
+        .catch(() => {
+          /* Offline or rate limited: the build-time data is still correct. */
+        });
+    }
+  </script>
+</Base>

@@ -1,0 +1,33 @@
+---
+import { version } from '../lib/releases';
+
+interface Props {
+  class?: string;
+  href?: string;
+  label?: string;
+}
+
+const { class: className = '', href, label = 'Download for Windows' } = Astro.props;
+const target = href ?? version?.installer?.url ?? '/download';
+const versionLabel = version ? `v${version.version}` : null;
+---
+
+<a href={target} class:list={['btn btn-accent group gap-2.5', className]} data-download-primary>
+  <svg viewBox="0 0 20 20" class="size-[15px] shrink-0" fill="currentColor" aria-hidden="true">
+    <path d="M2 3.6 9 2.6v6.8H2V3.6Zm0 12.8 7 1v-6.7H2v5.7Zm8 1.1 8 1.1V10.3h-8v7.2Zm0-14.9v6.8h8V1.5l-8 1.1Z"></path>
+  </svg>
+  <span>{label}</span>
+  {versionLabel && (
+    <span class="border-l border-current/25 pl-2.5 text-xs font-normal">{versionLabel}</span>
+  )}
+  <svg
+    viewBox="0 0 16 16"
+    class="size-3.5 shrink-0 -translate-x-1 opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-80"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    aria-hidden="true"
+  >
+    <path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke-linecap="round" stroke-linejoin="round"></path>
+  </svg>
+</a>

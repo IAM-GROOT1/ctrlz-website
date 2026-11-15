@@ -1,0 +1,222 @@
+{
+  "source": "github",
+  "fetchedAt": "2026-11-15T05:29:33.693Z",
+  "repo": "IAM-GROOT1/ctrlz",
+  "releases": [
+    {
+      "tag": "v1.1.3",
+      "name": "CTRL+Z 1.1.3 - unified logo",
+      "body": "## CTRL+Z 1.1.3 - unified logo\n\nThe exact in-app mark (ember rounded square, white Z, right-offset dash) is now the single logo source across the app.\n\n### Changed\n\n- Window/taskbar icon.\n- Executable icon and installer icon.\n- Sidebar/header brand mark now uses the rendered PNG asset.\n- Settings > About mark now uses the same asset.\n- `branding/` contains the exact high-resolution logo, transparent mark, and ICO.\n\nNo functional behavior changed. Existing profiles, backups, install state, and browser data are untouched.\n\n### Assets\n\n| File | Description |\n| --- | --- |\n| `CTRL+Z-Portable-1.1.3.exe` | Self-contained single-file portable app. |\n| `CTRL+Z-Setup-1.1.3.exe` | Per-user installer with shortcuts and uninstaller. |\n| `SHA256SUMS.txt` | SHA-256 checksums. |\n| `BUILD-INFO.txt` | Build/platform notes. |\n\nBinaries are **unsigned**, so SmartScreen may warn. Windows 10 1809+ / Windows 11, x64.",
+      "publishedAt": "2026-11-15T03:52:04Z",
+      "url": "https://github.com/IAM-GROOT1/ctrlz/releases/tag/v1.1.3",
+      "prerelease": false,
+      "draft": false,
+      "assets": [
+        {
+          "name": "BUILD-INFO.txt",
+          "size": 638,
+          "digest": "sha256:962884751238204b7152b68ccab073b964bd6dccf1823f0b672d997a112c8fc9",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.1.3/BUILD-INFO.txt",
+          "contentType": "application/octet-stream",
+          "downloadCount": 1
+        },
+        {
+          "name": "CTRL+Z-Portable-1.1.3.exe",
+          "size": 73277233,
+          "digest": "sha256:e0f3426197b466cf45cea36ef0d774d68cb91f00e7a32a529f1798069c48ac67",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.1.3/CTRL%2BZ-Portable-1.1.3.exe",
+          "contentType": "application/octet-stream",
+          "downloadCount": 3
+        },
+        {
+          "name": "CTRL+Z-Setup-1.1.3.exe",
+          "size": 68213274,
+          "digest": "sha256:b317f73f4165027fcc1701d31829cede868617a4b4b47d153950151ad2413b2e",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.1.3/CTRL%2BZ-Setup-1.1.3.exe",
+          "contentType": "application/octet-stream",
+          "downloadCount": 3
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "size": 182,
+          "digest": "sha256:3027d2de5a377417c79b6b3eedcb8818af639eac04437e06ebc1539a696c8b4f",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.1.3/SHA256SUMS.txt",
+          "contentType": "application/octet-stream",
+          "downloadCount": 1
+        }
+      ]
+    },
+    {
+      "tag": "v1.1.2",
+      "name": "CTRL+Z 1.1.2 - Select all by filter",
+      "body": "## CTRL+Z 1.1.2 - Select all on the Scan page\n\n### New\n\n- **Select all** button in the Scan footer.\n- It selects every app visible under the active filter:\n  - **All apps** ? all scanned apps.\n  - **Matched** ? every matched app.\n  - **Unmatched** ? every unmatched app.\n- **Select matched** remains as the matched-only shortcut and also respects the current search/category filters.\n- Selection count in the footer updates immediately.\n\n### Verified\n\n- All apps: 163 selected.\n- Matched: 105 selected.\n- Unmatched: 58 selected.\n- 60 automated tests passing; release build clean; GitHub Actions passed.\n\n### Assets\n\n| File | Description |\n| --- | --- |\n| `CTRL+Z-Portable-1.1.2.exe` | Self-contained single-file portable app. |\n| `CTRL+Z-Setup-1.1.2.exe` | Per-user installer with shortcuts and uninstaller. |\n| `SHA256SUMS.txt` | SHA-256 checksums. |\n| `BUILD-INFO.txt` | Build/platform notes. |\n\nBinaries are **unsigned**, so SmartScreen may warn. Windows 10 1809+ / Windows 11, x64.",
+      "publishedAt": "2026-11-14T22:45:46Z",
+      "url": "https://github.com/IAM-GROOT1/ctrlz/releases/tag/v1.1.2",
+      "prerelease": false,
+      "draft": false,
+      "assets": [
+        {
+          "name": "BUILD-INFO.txt",
+          "size": 638,
+          "digest": "sha256:3e37a8149dd11b76ffc580a74bf3f0a816069502b3689fade58f7670f84045ab",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.1.2/BUILD-INFO.txt",
+          "contentType": "application/octet-stream",
+          "downloadCount": 1
+        },
+        {
+          "name": "CTRL+Z-Portable-1.1.2.exe",
+          "size": 73269931,
+          "digest": "sha256:e09f32ec209236bc252b34c7f376ee711336679a22b1b920aacb646dc59b3c29",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.1.2/CTRL%2BZ-Portable-1.1.2.exe",
+          "contentType": "application/octet-stream",
+          "downloadCount": 4
+        },
+        {
+          "name": "CTRL+Z-Setup-1.1.2.exe",
+          "size": 68203026,
+          "digest": "sha256:88ec93df424be30f31ab6f8eb5b9adc14d17d687cd3def88ab9fde4e7360dcb3",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.1.2/CTRL%2BZ-Setup-1.1.2.exe",
+          "contentType": "application/octet-stream",
+          "downloadCount": 3
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "size": 182,
+          "digest": "sha256:8355c1f0a3aac96411d9d1fc207ce807118626e0aa0cf614c707f777b52255a6",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.1.2/SHA256SUMS.txt",
+          "contentType": "application/octet-stream",
+          "downloadCount": 1
+        }
+      ]
+    },
+    {
+      "tag": "v1.1.1",
+      "name": "CTRL+Z 1.1.1 - matched/unmatched scan filters",
+      "body": "## CTRL+Z 1.1.1 - matched/unmatched scan filters\n\nA small update focused on the Scan page.\n\n### New\n\n- **All apps / Matched / Unmatched** filter on the Scan page.\n- Combines with the existing search and category filters.\n- `Select matched` respects the current filter.\n- Updated Scan screenshot in the README.\n\n### Notes\n\n- The Scan page still shows global totals (total, matched, unmatched) in the status strip.\n- No changes to app install or browser backup/restore behavior.\n- Binaries are **unsigned**, so SmartScreen may warn.\n- Windows 10 1809+ / Windows 11, x64.\n\n### Assets\n\n| File | Description |\n| --- | --- |\n| `CTRL+Z-Portable-1.1.1.exe` | Self-contained single-file portable app. |\n| `CTRL+Z-Setup-1.1.1.exe` | Per-user installer with shortcuts and uninstaller. |\n| `SHA256SUMS.txt` | SHA-256 checksums. |\n| `BUILD-INFO.txt` | Build/platform notes. |",
+      "publishedAt": "2026-11-14T21:58:53Z",
+      "url": "https://github.com/IAM-GROOT1/ctrlz/releases/tag/v1.1.1",
+      "prerelease": false,
+      "draft": false,
+      "assets": [
+        {
+          "name": "BUILD-INFO.txt",
+          "size": 638,
+          "digest": "sha256:68350aea6a356f836d3c546f27801b9c79e8dc47d2ac02f18b8cff5f94ea6170",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.1.1/BUILD-INFO.txt",
+          "contentType": "application/octet-stream",
+          "downloadCount": 1
+        },
+        {
+          "name": "CTRL+Z-Portable-1.1.1.exe",
+          "size": 73269825,
+          "digest": "sha256:70cae41de8402c79d4a583a37e60cbe50543f9f05b7e1f6761560a4a7ccad9cc",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.1.1/CTRL%2BZ-Portable-1.1.1.exe",
+          "contentType": "application/octet-stream",
+          "downloadCount": 2
+        },
+        {
+          "name": "CTRL+Z-Setup-1.1.1.exe",
+          "size": 68201302,
+          "digest": "sha256:b0bdb96e40d6eab500d9cc832db898648c70f3bce7616370b3e00b613de9ea73",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.1.1/CTRL%2BZ-Setup-1.1.1.exe",
+          "contentType": "application/octet-stream",
+          "downloadCount": 2
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "size": 182,
+          "digest": "sha256:3458c21c6007aec184e7d0c92cd77286d20c51bfe8ec07f0175026df69558ee6",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.1.1/SHA256SUMS.txt",
+          "contentType": "application/octet-stream",
+          "downloadCount": 1
+        }
+      ]
+    },
+    {
+      "tag": "v1.1.0",
+      "name": "CTRL+Z 1.1.0 - Firefox and Zen support",
+      "body": "## CTRL+Z 1.1.0 - Firefox and Zen support\n\n**Undo a clean Windows install.** This release adds full Firefox-family backup and restore while keeping the Chromium flow intact.\n\n### New in 1.1.0\n\n- **Firefox-family detection** for Mozilla Firefox/ESR, **Zen**, LibreWolf, Waterfox, Floorp, Mullvad Browser, and Tor Browser.\n- **Firefox profile reading** via `profiles.ini`, including single-profile Tor/Mullvad-style bundles.\n- **Firefox backups** of `prefs.js`/`user.js`, `places.sqlite` (bookmarks/history), `sessionstore.jsonlz4` and session backups, extensions and extension storage, search engines, site permissions, bookmark backups, and `chrome/` customizations.\n- **Restore as new profiles** for Firefox registers new profiles in `profiles.ini`; Chromium still registers them in `Local State`.\n- **Same-engine safety:** archives are tagged as Chromium or Firefox and cannot be restored into the other engine.\n- **Credential exclusions:** Firefox `logins.json`, `key4.db`, `cookies.sqlite`, `formhistory.sqlite`, and related stores are never archived; Chromium cookies/Login Data/os_crypt remain excluded.\n- Running-browser detection now covers Firefox-family process names as well as Chromium.\n- UI now shows Chromium/Firefox family badges, filters restore targets by engine, and includes an updated Firefox/Zen restore screenshot.\n\n### Fixes included\n\n- Archive inspection now shows the profile list immediately instead of waiting for a redraw.\n- Archive metadata now labels the browser engine.\n- Version metadata and footer now report 1.1.0.\n- Firefox restored profile names are made unique (`Work (restored)`).\n- UTF-8 BOM in `profiles.ini`/`Local State` is handled safely.\n\n### Assets\n\n| File | Description |\n| --- | --- |\n| `CTRL+Z-Portable-1.1.0.exe` | Self-contained single-file portable app. |\n| `CTRL+Z-Setup-1.1.0.exe` | Per-user installer with shortcuts and uninstaller. |\n| `SHA256SUMS.txt` | SHA-256 checksums. |\n| `BUILD-INFO.txt` | Build/platform notes. |\n\n### Notes\n\n- Windows 10 1809+ / Windows 11, x64.\n- Binaries are **unsigned**, so SmartScreen may warn.\n- Browser passwords/cookies are not backed up by design. See the README and `docs/TESTING-RESTORE.md`.\n- Source: https://github.com/IAM-GROOT1/ctrlz",
+      "publishedAt": "2026-11-14T20:18:14Z",
+      "url": "https://github.com/IAM-GROOT1/ctrlz/releases/tag/v1.1.0",
+      "prerelease": false,
+      "draft": false,
+      "assets": [
+        {
+          "name": "BUILD-INFO.txt",
+          "size": 638,
+          "digest": "sha256:e6acb4976810d56173f48936a017ac15314dd4f40c8421f93e67218f0f3b015f",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.1.0/BUILD-INFO.txt",
+          "contentType": "application/octet-stream",
+          "downloadCount": 1
+        },
+        {
+          "name": "CTRL+Z-Portable-1.1.0.exe",
+          "size": 73269749,
+          "digest": "sha256:d9d54e398b43f09bb1f6a89446c265e168188061d3ae3d4d7539d44cf0d91a34",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.1.0/CTRL%2BZ-Portable-1.1.0.exe",
+          "contentType": "application/octet-stream",
+          "downloadCount": 2
+        },
+        {
+          "name": "CTRL+Z-Setup-1.1.0.exe",
+          "size": 68201451,
+          "digest": "sha256:f906ee04c6305f7b95ab3abf98e5eb422e7287794df41e5ed679d3077f0107a9",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.1.0/CTRL%2BZ-Setup-1.1.0.exe",
+          "contentType": "application/octet-stream",
+          "downloadCount": 2
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "size": 182,
+          "digest": "sha256:77e192241fa58d4975d259f98cf229389bdc92b1b03041debe7f402e37ce5c3c",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.1.0/SHA256SUMS.txt",
+          "contentType": "application/octet-stream",
+          "downloadCount": 2
+        }
+      ]
+    },
+    {
+      "tag": "v1.0.0",
+      "name": "CTRL+Z 1.0.0",
+      "body": "## CTRL+Z 1.0.0\n\n**Undo a clean Windows install.**\n\nCTRL+Z is a local-first Windows desktop app that rebuilds your app list and restores Chromium browser profiles after a fresh install.\n\n### Included\n\n- Scan via winget, Windows registry Uninstall keys, and Microsoft Store apps.\n- Portable JSON profiles with multiple saved PC setups.\n- Direct URL, GitHub latest-release, and local/USB installer sources with silent-switch detection and testing.\n- Live Chris Titus WinUtil catalog with cached/embedded offline fallbacks.\n- Silent install queue with progress, per-app status, logs, retry, pause, reboot handling, resume, winget bootstrap, and UAC relaunch.\n- Chromium browser backup/restore for Chrome, Edge, Brave, Vivaldi, Opera/Opera GX, Helium, Chromium, and other forks.\n- Browser backups include tabs/sessions, bookmarks, history, extensions, preferences, flags, search engines, and site permissions.\n- Saved passwords and cookies are deliberately excluded. Caches and crash data are excluded. Optional AES-256 ZIP encryption.\n- Dark/light Fluent-style UI with real app icons.\n\n### Assets\n\n| File | Description |\n| --- | --- |\n| `CTRL+Z-Portable-1.0.0.exe` | Self-contained single-file portable app. |\n| `CTRL+Z-Setup-1.0.0.exe` | Per-user installer with Start Menu shortcut and uninstaller. |\n| `SHA256SUMS.txt` | SHA-256 checksums. |\n| `BUILD-INFO.txt` | Build and platform notes. |\n\n### Notes\n\n- Windows 10 1809+ / Windows 11, x64.\n- Binaries are **unsigned**, so SmartScreen may warn.\n- Browser passwords/cookies are not backed up. See the README and `docs/TESTING-RESTORE.md` for known limitations and a fresh-VM test procedure.\n- Source, architecture, build instructions, and screenshots: https://github.com/IAM-GROOT1/ctrlz",
+      "publishedAt": "2026-11-14T19:17:14Z",
+      "url": "https://github.com/IAM-GROOT1/ctrlz/releases/tag/v1.0.0",
+      "prerelease": false,
+      "draft": false,
+      "assets": [
+        {
+          "name": "BUILD-INFO.txt",
+          "size": 638,
+          "digest": "sha256:3b62018d659ad4740493b4b3b9044bbf82905f55cc2b6a3cebefe2d8d6ad3a2e",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.0.0/BUILD-INFO.txt",
+          "contentType": "application/octet-stream",
+          "downloadCount": 1
+        },
+        {
+          "name": "CTRL+Z-Portable-1.0.0.exe",
+          "size": 73260905,
+          "digest": "sha256:f3b041c17891539467de07859b196250b4045a5ae4dbc869d3f80d36d2cd0ff5",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.0.0/CTRL%2BZ-Portable-1.0.0.exe",
+          "contentType": "application/octet-stream",
+          "downloadCount": 2
+        },
+        {
+          "name": "CTRL+Z-Setup-1.0.0.exe",
+          "size": 68194222,
+          "digest": "sha256:23411130e4e58c55ba7d7075d9f6d06e620220a679ca253cc6d0f911a51d8115",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.0.0/CTRL%2BZ-Setup-1.0.0.exe",
+          "contentType": "application/octet-stream",
+          "downloadCount": 2
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "size": 182,
+          "digest": "sha256:b13eca79203d867b520ca22a57f5c4ad9ccad92d9718026d5c65339a106e4327",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.0.0/SHA256SUMS.txt",
+          "contentType": "application/octet-stream",
+          "downloadCount": 2
+        }
+      ]
+    }
+  ]
+}
