@@ -123,3 +123,21 @@ there are no third-party scripts to allow.
 
 Every deployment is kept. **Deployments** → pick a previous production build → **Rollback**.
 Nothing else needs to change.
+
+## Optional: cookieless analytics
+
+The site ships with **no analytics at all**. If you later want traffic numbers without cookies or a
+consent banner, Cloudflare Web Analytics is the natural fit because the site is already on
+Cloudflare:
+
+1. Dashboard → **Analytics & Logs → Web Analytics → Add a site**, and pick the Pages project.
+2. If the dashboard offers automatic injection for Pages projects in your account, enable it and
+   there is nothing to deploy.
+3. If it gives you a beacon snippet instead, add it to `src/layouts/Base.astro` and allow it in
+   `public/_headers`: add `https://static.cloudflareinsights.com` to `script-src` and
+   `https://cloudflareinsights.com` to `connect-src`.
+4. Say so on the privacy page — it currently states that there are no analytics.
+
+It sets no cookies and does not fingerprint visitors, so no cookie banner is needed. Any other
+analytics product would need a privacy review and likely a banner; the site is designed to work
+without one.
