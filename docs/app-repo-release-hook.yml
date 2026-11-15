@@ -1,0 +1,40 @@
+# Copy this file into the app repository as
+# .github/workflows/rebuild-site.yml
+#
+# It calls a Cloudflare Pages deploy hook whenever a release is published, so
+# ctrlz.download picks up the new version without a manual rebuild.
+#
+# Before it works:
+#   1. Cloudflare dashboard -> Workers & Pages -> ctrlz-website -> Settings ->
+#      Builds & deployments -> Deploy hooks -> add one named "app release".
+#   2. Copy the hook URL.
+#   3. In the APP repository (IAM-GROOT1/ctrlz): Settings -> Secrets and
+#      variables -> Actions -> New repository secret, named
+#      CTRLZ_SITE_DEPLOY_HOOK, with the URL as the value.
+#
+# Never commit the hook URL. Anyone who has it can trigger builds.
+
+name: Rebuild ctrlz.download
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  notify-site:
+    name: Call the site deploy hook
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger the Cloudflare Pages build
+        env:
+          DEPLOY_HOOK_URL: ${{ secrets.CTRLZ_SITE_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$DEPLOY_HOOK_URL" ]; then
+            echo "CTRLZ_SITE_DEPLOY_HOOK is not set in this repository."
+            exit 1
+          fi
+          curl --fail --silent --show-error --retry 3 --retry-delay 5 -X POST "$DEPLOY_HOOK_URL"
