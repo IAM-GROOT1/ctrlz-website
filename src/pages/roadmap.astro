@@ -1,0 +1,105 @@
+---
+import Base from '../layouts/Base.astro';
+import { formatDate } from '../lib/release-parse';
+import { hasRoadmap, roadmap, roadmapCounts, roadmapSourceUrl, statusLabel } from '../lib/roadmap';
+import { buildLabel } from '../lib/build';
+
+const fetchedLabel = roadmap.fetchedAt ? formatDate(roadmap.fetchedAt) : null;
+
+const statusClass = {
+  done: 'border-accent/40 text-accent',
+  'in-progress': 'border-line text-ink',
+  planned: 'border-line text-muted',
+} as const;
+---
+
+<Base
+  title="What's coming"
+  description="The CTRL+Z roadmap: what has shipped, what is in progress and what is planned, read from the app repository at build time."
+>
+  <section class="pt-12 pb-8 sm:pt-16">
+    <div class="wrap">
+      <p class="eyebrow">What's coming</p>
+      <h1 class="display mt-5 max-w-3xl text-[clamp(2.8rem,1.4rem+4.6vw,4.75rem)]">
+        The plan, <em class="italic text-accent">in order.</em>
+      </h1>
+      <p class="lede mt-5 max-w-xl">
+        CTRL+Z is built one numbered section at a time, and each section ships on its own. This page
+        is generated from the roadmap the app repository publishes, so it cannot drift from what is
+        actually being built.
+      </p>
+      {hasRoadmap ? (
+        <p class="mono mt-5 text-xs text-muted">
+          {roadmapCounts.done} done · {roadmapCounts.inProgress} in progress ·{' '}
+          {roadmapCounts.planned} planned
+          {fetchedLabel ? <> · roadmap read {fetchedLabel}</> : null}
+        </p>
+      ) : null}
+    </div>
+  </section>
+
+  {hasRoadmap ? (
+    <section class="wrap pb-16" aria-label="Roadmap sections">
+      <ol class="grid gap-0 border-t border-line">
+        {roadmap.sections.map((section) => (
+          <li class="grid gap-3 border-b border-line py-7 sm:grid-cols-[3.5rem_1fr_auto] sm:items-baseline sm:gap-6">
+            <span class="mono text-xs text-muted">{String(section.number).padStart(2, '0')}</span>
+            <div>
+              <h2 class="text-lg font-semibold tracking-tight text-ink">{section.title}</h2>
+              {section.note ? <p class="mono mt-1.5 text-xs text-muted">{section.note}</p> : null}
+            </div>
+            <span
+              class:list={[
+                'mono inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1 text-[0.6875rem] uppercase tracking-wider',
+                statusClass[section.status],
+              ]}
+            >
+              <span
+                class:list={[
+                  'size-1.5 rounded-full',
+                  section.status === 'done' ? 'bg-accent' : 'bg-current opacity-40',
+                ]}
+                aria-hidden="true"
+              ></span>
+              {statusLabel[section.status]}
+            </span>
+          </li>
+        ))}
+      </ol>
+    </section>
+  ) : (
+    <section class="wrap pb-16" aria-label="Roadmap unavailable">
+      <div class="max-w-xl border-t border-line pt-8">
+        <p class="text-base text-ink">The roadmap could not be read from the app repository.</p>
+        <p class="mt-3 text-sm leading-relaxed text-muted">
+          The site keeps the last copy it fetched successfully, so this should be temporary. You can
+          always read the source of truth directly.
+        </p>
+        <p class="mt-5">
+          <a class="link" href={roadmapSourceUrl} target="_blank" rel="noopener noreferrer">
+            Read ROADMAP.md on GitHub
+          </a>
+        </p>
+      </div>
+    </section>
+  )}
+
+  <section class="wrap pb-20" aria-label="About this page">
+    <div class="grid gap-4 border-t border-line pt-8 text-sm leading-relaxed text-muted sm:grid-cols-2">
+      <p>
+        The list is fetched from
+        <a class="link" href={roadmapSourceUrl} target="_blank" rel="noopener noreferrer">
+          ROADMAP.md
+        </a>{' '}
+        when the site is built. A section that ships appears as <em>Done</em> after the next deploy,
+        which happens automatically when the app repository publishes a release or updates its
+        roadmap.
+      </p>
+      <p class="mono text-xs">
+        Roadmap source: IAM-GROOT1/ctrlz@{roadmap.fromNetwork ? 'main' : 'cached copy'}
+        <br />
+        Page built {buildLabel}
+      </p>
+    </div>
+  </section>
+</Base>

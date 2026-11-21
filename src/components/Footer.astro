@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import mark from '../assets/brand/mark-1024.png';
 import { footerNav, footnote, site } from '../data/site';
+import { buildLabel } from '../lib/build';
 
 const year = new Date().getFullYear();
 ---
@@ -60,6 +61,8 @@ const year = new Date().getFullYear();
       </a>
       <span aria-hidden="true"> · </span>
       {footnote.websiteLicense}
+      <span aria-hidden="true"> · </span>
+      <span class="mono">Site built {buildLabel}</span>
     </p>
   </div>
 
