@@ -131,3 +131,11 @@ export function formatDate(iso: string | null): string {
 export function hasReleases(data: ReleaseData | null | undefined): boolean {
   return Boolean(data && Array.isArray(data.releases) && data.releases.length > 0);
 }
+
+/**
+ * True when this build could not refresh the release list and shows the copy cached at an earlier
+ * build. The page then says "last known release" with that date instead of presenting it as current.
+ */
+export function isLastKnownRelease(data: ReleaseData | null | undefined): boolean {
+  return Boolean(data && data.source === 'cache' && data.releases.length > 0);
+}

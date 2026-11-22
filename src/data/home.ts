@@ -10,7 +10,7 @@ export const hero = {
   lede: 'CTRL+Z remembers the apps and browser profiles on this PC, then puts them back after you reinstall Windows.',
   primaryCta: 'Download for Windows',
   secondaryCta: { label: 'See how it works', href: '#how' },
-  facts: ['Free and open source', 'MIT licensed', 'No account', 'No telemetry'],
+  facts: ['Free and open source', 'AGPL-3.0 licensed', 'No account', 'No telemetry'],
 } as const;
 
 export const howItWorks = {
@@ -139,7 +139,7 @@ export const portableProfiles = {
 export const openSource = {
   eyebrow: 'Open source',
   title: 'The whole thing is on GitHub.',
-  body: 'MIT licensed. No account, no telemetry, no cloud service. The app talks to Microsoft’s winget and to GitHub only when you ask it to install something.',
+  body: 'AGPL-3.0 licensed. No account, no telemetry, no cloud service. The app talks to Microsoft’s winget and to GitHub only to check for its own updates and when you ask it to install something.',
   repo: 'IAM-GROOT1/ctrlz',
 } as const;
 

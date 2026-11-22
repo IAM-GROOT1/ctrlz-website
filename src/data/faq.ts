@@ -9,7 +9,7 @@ export const faq: FaqItem[] = [
   {
     question: 'Is CTRL+Z really free?',
     answer:
-      'Yes. The app is MIT licensed, there is no paid tier today, no account is required, and nothing is metered. The website you are reading has its own licence, but the app is free to use, change and share.',
+      'Yes. The app is licensed under AGPL-3.0 (releases up to v1.1.3 were MIT), there is no paid tier today, no account is required, and nothing is metered. The website you are reading has its own licence, but the app is free to use, change and share.',
   },
   {
     question: 'Does it back up my saved passwords?',
