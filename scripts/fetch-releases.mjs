@@ -48,6 +48,25 @@ async function readCache() {
   }
 }
 
+/**
+ * Keeps the cached releases but records that this build could not refresh them, so the pages say
+ * "last known release" with the date it was fetched instead of presenting it as current.
+ */
+async function markCached(cached) {
+  if (cached.source === 'cache') return;
+  try {
+    await writeFile(
+      OUT_FILE,
+      `${JSON.stringify({ ...cached, source: 'cache' }, null, 2)}\n`,
+      'utf8',
+    );
+  } catch (error) {
+    // Never fail the build over a label: the cached data is still served, just not marked.
+    const message = error instanceof Error ? error.message : String(error);
+    console.warn(`[releases] could not mark the cached data as last known: ${message}`);
+  }
+}
+
 async function fetchReleases(attempt = 1) {
   const headers = {
     Accept: 'application/vnd.github+json',
@@ -88,6 +107,7 @@ async function main() {
     const message = error instanceof Error ? error.message : String(error);
     if (cached && cached.releases.length > 0) {
       console.warn(`[releases] ${message} — keeping cached data from ${cached.fetchedAt}.`);
+      await markCached(cached);
       return;
     }
     console.warn(`[releases] ${message} — no cache available; the site will point to GitHub.`);
@@ -104,6 +124,7 @@ async function main() {
   if (releases.length === 0) {
     if (cached && cached.releases.length > 0) {
       console.warn('[releases] API returned no releases — keeping cached data.');
+      await markCached(cached);
       return;
     }
     await mkdir(dirname(OUT_FILE), { recursive: true });

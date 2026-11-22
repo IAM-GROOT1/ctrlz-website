@@ -6,6 +6,7 @@ import {
   formatDate,
   getLatestStable,
   hasReleases,
+  isLastKnownRelease,
   parseVersion,
   sortReleases,
   type Release,
@@ -94,3 +95,6 @@ export const version: VersionSummary | null = latest
 export const installerSize = version?.installer?.size ?? null;
 
 export const fetchedLabel = formatDate(releaseData?.fetchedAt ?? null);
+
+/** True when this build fell back to the release list cached at an earlier build. */
+export const isLastKnown = isLastKnownRelease(releaseData);
