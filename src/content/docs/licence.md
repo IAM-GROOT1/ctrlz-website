@@ -1,14 +1,17 @@
 ---
 title: Licence
-summary: The app is MIT. This website is not.
+summary: The app is AGPL-3.0-only. This website is not.
 order: 3
 ---
 
 ### The application
 
-CTRL+Z is released under the [MIT licence](https://github.com/IAM-GROOT1/ctrlz/blob/main/LICENSE).
-You can use it, change it, and share it, including commercially, as long as the copyright notice
-travels with it.
+CTRL+Z is released under the
+[GNU Affero General Public License v3.0](https://github.com/IAM-GROOT1/ctrlz/blob/main/LICENSE)
+(AGPL-3.0-only). You can use it, study it, change it and share it, including commercially. If you
+distribute it, changed or not, or run a changed version for others over a network, you must make
+its source available under the same licence. Releases up to v1.1.3 were published under the MIT licence and stay
+available under it.
 
 ### This website
 

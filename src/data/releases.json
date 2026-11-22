@@ -1,8 +1,113 @@
 {
-  "source": "github",
-  "fetchedAt": "2026-11-15T17:20:54.662Z",
+  "source": "cache",
+  "fetchedAt": "2026-11-22T12:52:01.636Z",
   "repo": "IAM-GROOT1/ctrlz",
   "releases": [
+    {
+      "tag": "v1.3.1",
+      "name": "CTRL+Z 1.3.1",
+      "body": "# CTRL+Z v1.3.1  ## Changes since v1.3.0  - Merge pull request #10 from IAM-GROOT1/fix/update-feed-diagnostics (5f0b13e) - fix(update): stop mislabelling timeouts and token advice in update failures (8af0746) - test(ui): add the deferral check (currently failing at the queue stage) (5eb5a8d) - test(ui): add the portable self-update check (ef175e7) - test(ui): isolate the update state between updater phases (9d715ea) - test(ui): add a shared UI-automation library and the installed-update check (cc4b974)  ## Downloads  - CTRL+Z-Setup-1.3.1.exe - installer for installed copies - CTRL+Z-Portable-1.3.1.exe - standalone portable exe - SHA256SUMS.txt - SHA-256 for every asset above; the updater refuses an asset that does not match  \n\n Versions up to and including 1.1.3 have no updater and must be updated manually by installing 1.2.0 or later; from 1.2.0 onward the in-app updater handles it. \n",
+      "publishedAt": "2026-11-21T23:30:34Z",
+      "url": "https://github.com/IAM-GROOT1/ctrlz/releases/tag/v1.3.1",
+      "prerelease": false,
+      "draft": false,
+      "assets": [
+        {
+          "name": "CTRL+Z-Portable-1.3.1.exe",
+          "size": 73349950,
+          "digest": "sha256:322bd18f56b2fe43c7ba287819b2aab8bb8b309121625598e6422e94a259c831",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.3.1/CTRL%2BZ-Portable-1.3.1.exe",
+          "contentType": "application/x-msdownload",
+          "downloadCount": 2
+        },
+        {
+          "name": "CTRL+Z-Setup-1.3.1.exe",
+          "size": 68382491,
+          "digest": "sha256:787e9990848e41a450ca2eb4b910c9c9e921f9630782e8d946ad1239cb9755a2",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.3.1/CTRL%2BZ-Setup-1.3.1.exe",
+          "contentType": "application/x-msdownload",
+          "downloadCount": 3
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "size": 183,
+          "digest": "sha256:f51f97d883a7cb343d53231250845682740fd19a8518c18c91f84df9d2366444",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.3.1/SHA256SUMS.txt",
+          "contentType": "text/plain; charset=utf-8",
+          "downloadCount": 3
+        }
+      ]
+    },
+    {
+      "tag": "v1.3.0",
+      "name": "CTRL+Z 1.3.0",
+      "body": "# CTRL+Z v1.3.0  ## Changes since v1.2.0  - Merge pull request #9 from IAM-GROOT1/fix/drift-single-token-match (a98c2d8) - fix(drift): a single shared word can no longer claim an app (66cfb79) - Merge pull request #7 from IAM-GROOT1/chore/readme-roadmap-and-site-hook (b71f660) - Merge origin/main into chore/readme-roadmap-and-site-hook (70fcdfe) - docs(roadmap): track the log and state path redaction under section 4 (5b84572) - Merge pull request #5 from IAM-GROOT1/feature/safety-checks (6687a6a) - ci(site): call the Cloudflare Pages deploy hook on release and on docs pushes (7cbb0a0) - docs(roadmap): publish a section checklist and generate the README block (685d6b1) - test(safety): assert saved state holds no personal path (33c8883) - fix(safety): redact paths in every exception log on the safety path (4b999ed) - fix(safety): warn on asset substitution and tighten privacy guarantees (6a19073) - docs: document the safety checks and mark the roadmap items done (bb70e7a) - feat(safety): show an install preview before a run (30dbf44) - feat(safety): plan an install and dry-run it without installing (e0027b1) - feat(safety): add the profile drift window (275e6e1) - feat(safety): compare the saved profile with the current PC (a112cbc) - feat(safety): add the ready-to-wipe checklist page (496c86a) - feat(safety): build the ready-to-wipe report from the probes (02fd181) - feat(safety): detect developer items, game libraries and browser backup age (fc89841) - feat(safety): add bounded read-only folder scanner and readiness models (59941be)  ## Downloads  - CTRL+Z-Setup-1.3.0.exe - installer for installed copies - CTRL+Z-Portable-1.3.0.exe - standalone portable exe - SHA256SUMS.txt - SHA-256 for every asset above; the updater refuses an asset that does not match  \n\n Versions up to and including 1.1.3 have no updater and must be updated manually by installing 1.2.0 or later; from 1.2.0 onward the in-app updater handles it. \n",
+      "publishedAt": "2026-11-21T21:55:39Z",
+      "url": "https://github.com/IAM-GROOT1/ctrlz/releases/tag/v1.3.0",
+      "prerelease": false,
+      "draft": false,
+      "assets": [
+        {
+          "name": "CTRL+Z-Portable-1.3.0.exe",
+          "size": 73349289,
+          "digest": "sha256:4e49ad4640ffcc6e34c15c44d3e3ec7242bac61e39cb6be76c95a1bacfa91180",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.3.0/CTRL%2BZ-Portable-1.3.0.exe",
+          "contentType": "application/x-msdownload",
+          "downloadCount": 4
+        },
+        {
+          "name": "CTRL+Z-Setup-1.3.0.exe",
+          "size": 68381686,
+          "digest": "sha256:f980331005972d8306158b79f1a72ff8b986e29eb3801c1edc2a05e139ff9f64",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.3.0/CTRL%2BZ-Setup-1.3.0.exe",
+          "contentType": "application/x-msdownload",
+          "downloadCount": 4
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "size": 183,
+          "digest": "sha256:523da8a6059dc1e76ac5d3e58945382459eed1f8ac5e68244dabbe8167183c9c",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.3.0/SHA256SUMS.txt",
+          "contentType": "text/plain; charset=utf-8",
+          "downloadCount": 5
+        }
+      ]
+    },
+    {
+      "tag": "v1.2.0",
+      "name": "CTRL+Z 1.2.0",
+      "body": "# CTRL+Z v1.2.0\n\n## Changes since v1.1.3\n\n- Merge pull request #4 from IAM-GROOT1/fix/release-pipeline (8075bdd)\n- fix(release): render the commit list in generated release notes (2a4828c)\n- fix(release): keep VersionInfoVersion numeric so pre-release tags build (87e758a)\n- Merge pull request #3 from IAM-GROOT1/feature/self-update (15f9728)\n- chore(license): add AGPL SPDX headers to the updater sources (e21e0c3)\n- docs: add ROADMAP.md and document the pinned toolchain (5a5b8ad)\n- ci: pin Inno Setup, verify the whole build, and enforce checksums (63d8384)\n- feat(update): allow a debug-only repository override for the release feed (b54bbfa)\n- fix(update): always restart the app when an apply fails (15d6b75)\n- docs: document updates and the release process (40843a3)\n- ci: add a tag-driven release workflow and harden pull-request CI (cdebad3)\n- feat(update): add update settings and defer prompts during active work (ae089fc)\n- feat(update): prompt, download, verify and apply with rollback (475ab17)\n- feat(update): select the correct asset and verify downloads (74d36ef)\n- feat(update): check GitHub releases with channel and version gating (a216acb)\n- feat(update): add semantic version source and build-time stamping (5dd936c)\n- Merge pull request #2 from IAM-GROOT1/chore/relicense-agpl (94dc91f)\n- docs: add THIRD_PARTY.md dependency license inventory (2782f7d)\n- docs: add CONTRIBUTING.md with AGPL terms and CLA placeholder (54d31f7)\n- docs: add LICENSING.md explaining AGPL core and MIT cutoff (15ea456)\n- docs: replace README license section with AGPL-3.0-only (96e29d2)\n- feat(settings): show AGPL license and source link in About (2ff1523)\n- chore(build): declare AGPL-3.0-only as the package license (6be20e7)\n- chore(license): add AGPL-3.0-only SPDX header to first-party sources (eefb95d)\n- chore(license): replace MIT with AGPL-3.0-only (a5a98c0)\n- Keep the exact app logo as the only brand asset (14aadf0)\n\n## Downloads\n\n- CTRL+Z-Setup-1.2.0.exe - installer for installed copies\n- CTRL+Z-Portable-1.2.0.exe - standalone portable exe\n- SHA256SUMS.txt - SHA-256 for every asset above; the updater refuses an asset that does not match\r\n",
+      "publishedAt": "2026-11-19T13:30:17Z",
+      "url": "https://github.com/IAM-GROOT1/ctrlz/releases/tag/v1.2.0",
+      "prerelease": false,
+      "draft": false,
+      "assets": [
+        {
+          "name": "CTRL+Z-Portable-1.2.0.exe",
+          "size": 73293205,
+          "digest": "sha256:435ecc71aad75242788dfad3ca3bf92858f97d582004d606c95d938b702a6c32",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.2.0/CTRL%2BZ-Portable-1.2.0.exe",
+          "contentType": "application/x-msdownload",
+          "downloadCount": 4
+        },
+        {
+          "name": "CTRL+Z-Setup-1.2.0.exe",
+          "size": 68326623,
+          "digest": "sha256:048c0c7604b1e75269d6373f845455bacb20139810f84662b6fdb58b06f75547",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.2.0/CTRL%2BZ-Setup-1.2.0.exe",
+          "contentType": "application/x-msdownload",
+          "downloadCount": 3
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "size": 183,
+          "digest": "sha256:5093036648407cd524fdf985c8bab81a434bc388953c7df4fac7e6f1c0a3dcf7",
+          "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.2.0/SHA256SUMS.txt",
+          "contentType": "text/plain; charset=utf-8",
+          "downloadCount": 2
+        }
+      ]
+    },
     {
       "tag": "v1.1.3",
       "name": "CTRL+Z 1.1.3 - unified logo",
@@ -26,7 +131,7 @@
           "digest": "sha256:e0f3426197b466cf45cea36ef0d774d68cb91f00e7a32a529f1798069c48ac67",
           "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.1.3/CTRL%2BZ-Portable-1.1.3.exe",
           "contentType": "application/octet-stream",
-          "downloadCount": 3
+          "downloadCount": 5
         },
         {
           "name": "CTRL+Z-Setup-1.1.3.exe",
@@ -34,7 +139,7 @@
           "digest": "sha256:b317f73f4165027fcc1701d31829cede868617a4b4b47d153950151ad2413b2e",
           "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.1.3/CTRL%2BZ-Setup-1.1.3.exe",
           "contentType": "application/octet-stream",
-          "downloadCount": 3
+          "downloadCount": 9
         },
         {
           "name": "SHA256SUMS.txt",

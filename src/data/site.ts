@@ -16,7 +16,7 @@ export const site = {
   releasesApi: 'https://api.github.com/repos/IAM-GROOT1/ctrlz/releases/latest',
   issues: 'https://github.com/IAM-GROOT1/ctrlz/issues',
   license: 'https://github.com/IAM-GROOT1/ctrlz/blob/main/LICENSE',
-  appLicenseName: 'MIT',
+  appLicenseName: 'AGPL-3.0-only',
   author: 'IAM-GROOT1',
 } as const;
 

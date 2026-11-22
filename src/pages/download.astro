@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { checksumsAsset, downloads, fetchedLabel, version } from '../lib/releases';
+import { checksumsAsset, downloads, fetchedLabel, isLastKnown, version } from '../lib/releases';
 import { site } from '../data/site';
 
 const title = 'Download';
@@ -28,6 +28,9 @@ const verifyCommand = `Get-FileHash .\\${installerName} -Algorithm SHA256`;
 
           {version ? (
             <p class="mono mt-6 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs text-muted">
+              {isLastKnown && (
+                <span data-last-known>Last known release, as of {fetchedLabel}:</span>
+              )}
               <span data-release-version>v{version.version}</span>
               <span aria-hidden="true">·</span>
               <span>released {version.publishedLabel}</span>
@@ -339,6 +342,11 @@ const verifyCommand = `Get-FileHash .\\${installerName} -Algorithm SHA256`;
           const checksumsLink = document.querySelector<HTMLAnchorElement>('[data-checksums-link]');
           if (checksumsLink && checksums)
             checksumsLink.href = String(checksums.browser_download_url);
+
+          // The release shown is now the live one, so it is no longer only the last known.
+          document.querySelectorAll<HTMLElement>('[data-last-known]').forEach((element) => {
+            element.hidden = true;
+          });
 
           if (release.tag_name !== buildTag) {
             const version = String(release.tag_name).replace(/^v/i, '');

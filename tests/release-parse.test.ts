@@ -8,6 +8,7 @@ import {
   formatDate,
   getLatestStable,
   hasReleases,
+  isLastKnownRelease,
   parseVersion,
   sortReleases,
   type Release,
@@ -193,5 +194,21 @@ describe('hasReleases', () => {
         releases: [release('v1.0.0', '2026-01-01T00:00:00Z')],
       }),
     ).toBe(true);
+  });
+});
+
+describe('isLastKnownRelease', () => {
+  const data = (source: string, count = 1) => ({
+    source,
+    fetchedAt: '2026-11-22T00:00:00Z',
+    repo: 'IAM-GROOT1/ctrlz',
+    releases: Array.from({ length: count }, () => ({}) as Release),
+  });
+
+  it('is true only for cached data that still has releases', () => {
+    expect(isLastKnownRelease(data('cache'))).toBe(true);
+    expect(isLastKnownRelease(data('github'))).toBe(false);
+    expect(isLastKnownRelease(data('cache', 0))).toBe(false);
+    expect(isLastKnownRelease(null)).toBe(false);
   });
 });

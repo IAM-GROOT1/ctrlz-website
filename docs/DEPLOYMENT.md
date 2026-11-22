@@ -3,6 +3,30 @@
 The site is a fully static Astro build. Cloudflare Pages serves `dist/` and rebuilds on every
 push. Nothing here needs a server, a database or a runtime environment.
 
+## How deploys work now
+
+The Pages project is deployed by the **Deploy** GitHub Actions workflow
+(`.github/workflows/deploy.yml`), not by Cloudflare's Git integration. It runs on every push to
+`main`, on demand (_Actions → Deploy → Run workflow_), and every 15 minutes. A scheduled run
+deploys only when something changed: this site, the app's `main` branch (new merged changes
+appear on the changelog under "Next"), the app's latest release (download links and release
+notes) or its `ROADMAP.md`. The deployed site carries `/build.txt` with that fingerprint.
+
+One-time setup, done by the account owner (these are credentials, so they never go in chat):
+
+1. Cloudflare dashboard → **My Profile → API Tokens → Create Token** → template **Edit
+   Cloudflare Workers**, or a custom token with **Account → Cloudflare Pages → Edit**. Limit it
+   to your account.
+2. Copy your **Account ID** (Workers & Pages overview, right-hand side).
+3. In a terminal: `gh secret set CLOUDFLARE_API_TOKEN --repo IAM-GROOT1/ctrlz-website` and
+   `gh secret set CLOUDFLARE_ACCOUNT_ID --repo IAM-GROOT1/ctrlz-website` (each prompts for the
+   value).
+4. If the Pages project is not called `ctrlz-website`:
+   `gh variable set CLOUDFLARE_PAGES_PROJECT --repo IAM-GROOT1/ctrlz-website --body <name>`.
+5. Run the workflow once (_Actions → Deploy → Run workflow_).
+
+Without the secrets the workflow still builds and ends with a warning saying it did not deploy.
+
 ## What Cloudflare Pages needs
 
 | Setting          | Value                          |
