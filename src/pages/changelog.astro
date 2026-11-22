@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { marked } from 'marked';
-import { formatDate } from '../lib/release-parse';
+import { formatDate, formatReleaseNotes } from '../lib/release-parse';
 import { fetchedLabel, releases } from '../lib/releases';
 import { site } from '../data/site';
 import updatesJson from '../data/updates.json';
@@ -17,14 +17,14 @@ const inProgress = (updates.items ?? []).map((item) => ({
 }));
 
 const entries = releases.slice(0, 30).map((release) => {
-  // The release body usually repeats the release title as its first heading.
-  const body = (release.body ?? '').replace(/^\s*#{1,3}\s+[^\n]*\n+/, '');
-
   return {
     ...release,
     version: release.tag.replace(/^v/i, ''),
     date: formatDate(release.publishedAt),
-    html: marked.parse(body, { async: false, gfm: true }) as string,
+    html: marked.parse(formatReleaseNotes(release.body ?? ''), {
+      async: false,
+      gfm: true,
+    }) as string,
   };
 });
 ---
