@@ -1,0 +1,59 @@
+name: Sync releases
+
+# Keeps ctrlz.download current without any Cloudflare secret.
+#
+# Every 15 minutes (or on demand) this refreshes src/data/releases.json from the
+# app repository's GitHub Releases. When a release was added or its notes changed,
+# the refreshed file is committed to main, and Cloudflare Pages rebuilds the site
+# from that push like it does for any other commit.
+#
+# The app repository can also trigger it instantly:
+#   gh api repos/IAM-GROOT1/ctrlz-website/dispatches -f event_type=release-published
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  repository_dispatch:
+    types: [release-published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-releases
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Refresh release data
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Fetch releases from the app repository
+        run: node scripts/fetch-releases.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit when something changed
+        run: |
+          # fetchedAt and download counters change on every run; they are not news.
+          if git diff --quiet -I'"fetchedAt"' -I'"downloadCount"' -- src/data/releases.json; then
+            echo "No new release or release-note changes."
+            git checkout -- src/data/releases.json
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/releases.json
+          git commit -m "chore(releases): sync release data from the app repository"
+          git push origin HEAD:main

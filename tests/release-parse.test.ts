@@ -195,3 +195,36 @@ describe('hasReleases', () => {
     ).toBe(true);
   });
 });
+
+import { formatReleaseNotes } from '../src/lib/release-parse';
+
+describe('formatReleaseNotes', () => {
+  const flat =
+    '# CTRL+Z v1.3.1  ## Changes since v1.3.0  - Merge pull request #10 from IAM-GROOT1/fix/update-feed-diagnostics (5f0b13e) - fix(update): stop mislabelling timeouts and token advice in update failures (8af0746) - test(ui): add the deferral check (5eb5a8d) - feat(catalog): add the update-feed view (cc4b974)  ## Downloads  - CTRL+Z-Setup-1.3.1.exe - installer';
+
+  it('groups flattened commit lists and drops internal commits', () => {
+    const out = formatReleaseNotes(flat);
+    expect(out).toContain('### New\n\n- Catalog: Add the update-feed view');
+    expect(out).toContain(
+      '### Fixed\n\n- Update: Stop mislabelling timeouts and token advice in update failures',
+    );
+    expect(out).not.toMatch(/Merge|test|Downloads|8af0746/);
+  });
+
+  it('handles newline-separated lists', () => {
+    const out = formatReleaseNotes(
+      '# CTRL+Z v1\n\n## Changes since v0\n\n- fix: a thing (abc1234)\n- chore: x (abc1235)\n\n## Downloads\n\n- a',
+    );
+    expect(out).toBe('### Fixed\n\n- A thing\n');
+  });
+
+  it('says so when only internal changes shipped', () => {
+    expect(formatReleaseNotes('# T\n\n## Changes since v0\n\n- ci: x (abc1234)')).toContain(
+      'internal',
+    );
+  });
+
+  it('leaves hand-written notes alone apart from the title', () => {
+    expect(formatReleaseNotes('## Title\n\n### Changed\n\n- x')).toBe('### Changed\n\n- x');
+  });
+});

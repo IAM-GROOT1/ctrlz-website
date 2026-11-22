@@ -76,6 +76,10 @@ environment. Never put values in the repository; `.env*` files are git-ignored.
 
 ## 5. Rebuild when the app releases
 
+**Automatic (no secrets):** `.github/workflows/sync-releases.yml` checks the app repository every
+15 minutes and commits a refreshed `src/data/releases.json` to `main` when a release is new or its
+notes changed; Cloudflare then builds that push. The options below only make it faster.
+
 The download page and changelog read GitHub Releases at build time, so they need a new build
 after a release. Choose one of these.
 

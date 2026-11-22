@@ -1,19 +1,19 @@
 ---
 import Base from '../layouts/Base.astro';
 import { marked } from 'marked';
-import { formatDate } from '../lib/release-parse';
+import { formatDate, formatReleaseNotes } from '../lib/release-parse';
 import { fetchedLabel, releases } from '../lib/releases';
 import { site } from '../data/site';
 
 const entries = releases.slice(0, 30).map((release) => {
-  // The release body usually repeats the release title as its first heading.
-  const body = (release.body ?? '').replace(/^\s*#{1,3}\s+[^\n]*\n+/, '');
-
   return {
     ...release,
     version: release.tag.replace(/^v/i, ''),
     date: formatDate(release.publishedAt),
-    html: marked.parse(body, { async: false, gfm: true }) as string,
+    html: marked.parse(formatReleaseNotes(release.body ?? ''), {
+      async: false,
+      gfm: true,
+    }) as string,
   };
 });
 ---
@@ -29,8 +29,8 @@ const entries = releases.slice(0, 30).map((release) => {
         Every release, <em class="italic text-accent">as published.</em>
       </h1>
       <p class="lede mt-5 max-w-xl">
-        Written in the GitHub release notes and generated for this page when the site is built. A
-        brand-new release appears after the next deploy.
+        Pulled from GitHub Releases. New versions appear here automatically, usually within fifteen
+        minutes of being published.
       </p>
       <p class="mono mt-5 text-xs text-muted">
         {entries.length} release{entries.length === 1 ? '' : 's'} · last refreshed {fetchedLabel}
