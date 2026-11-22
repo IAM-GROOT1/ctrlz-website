@@ -1,90 +1,12 @@
 {
   "source": "github",
-  "fetchedAt": "2026-11-22T19:44:39.708Z",
+  "fetchedAt": "2026-11-22T13:17:09.539Z",
   "since": {
     "tag": "v1.3.1",
     "publishedAt": "2026-11-21T23:30:34Z"
   },
-  "mainSha": "6c2aeb93fe9f77c8571b4e4269e0adf69bb800cd",
+  "mainSha": "a63b3ec06605482778496d6f23be04ba59c9f143",
   "items": [
-    {
-      "number": 34,
-      "title": "Guided export for moving a profile to another PC",
-      "url": "https://github.com/IAM-GROOT1/ctrlz/pull/34",
-      "mergedAt": "2026-11-22T19:43:09Z"
-    },
-    {
-      "number": 33,
-      "title": "First-run welcome guide",
-      "url": "https://github.com/IAM-GROOT1/ctrlz/pull/33",
-      "mergedAt": "2026-11-22T19:38:17Z"
-    },
-    {
-      "number": 32,
-      "title": "Screen-reader names, keyboard shortcuts and reduced motion",
-      "url": "https://github.com/IAM-GROOT1/ctrlz/pull/32",
-      "mergedAt": "2026-11-22T19:30:03Z"
-    },
-    {
-      "number": 31,
-      "title": "Resume interrupted downloads and fall back to mirrors",
-      "url": "https://github.com/IAM-GROOT1/ctrlz/pull/31",
-      "mergedAt": "2026-11-22T19:17:27Z"
-    },
-    {
-      "number": 30,
-      "title": "Check installer signatures and release checksum files",
-      "url": "https://github.com/IAM-GROOT1/ctrlz/pull/30",
-      "mergedAt": "2026-11-22T18:56:44Z"
-    },
-    {
-      "number": 29,
-      "title": "Import app lists from winget, Scoop and Chocolatey",
-      "url": "https://github.com/IAM-GROOT1/ctrlz/pull/29",
-      "mergedAt": "2026-11-22T18:41:32Z"
-    },
-    {
-      "number": 28,
-      "title": "Save a diagnostics bundle on request",
-      "url": "https://github.com/IAM-GROOT1/ctrlz/pull/28",
-      "mergedAt": "2026-11-22T18:35:02Z"
-    },
-    {
-      "number": 27,
-      "title": "Verify a browser backup before you wipe",
-      "url": "https://github.com/IAM-GROOT1/ctrlz/pull/27",
-      "mergedAt": "2026-11-22T18:25:53Z"
-    },
-    {
-      "number": 26,
-      "title": "Never apply an update over a running install",
-      "url": "https://github.com/IAM-GROOT1/ctrlz/pull/26",
-      "mergedAt": "2026-11-22T13:59:15Z"
-    },
-    {
-      "number": 25,
-      "title": "Keep the Windows account out of logs and install state",
-      "url": "https://github.com/IAM-GROOT1/ctrlz/pull/25",
-      "mergedAt": "2026-11-22T13:53:50Z"
-    },
-    {
-      "number": 24,
-      "title": "Portable apps: Start menu shortcuts and GitHub release updates",
-      "url": "https://github.com/IAM-GROOT1/ctrlz/pull/24",
-      "mergedAt": "2026-11-22T13:49:21Z"
-    },
-    {
-      "number": 23,
-      "title": "ctrlz updates: winget app updates from the command line",
-      "url": "https://github.com/IAM-GROOT1/ctrlz/pull/23",
-      "mergedAt": "2026-11-22T13:42:13Z"
-    },
-    {
-      "number": 22,
-      "title": "Updates page: app updates through winget",
-      "url": "https://github.com/IAM-GROOT1/ctrlz/pull/22",
-      "mergedAt": "2026-11-22T13:25:43Z"
-    },
     {
       "number": 21,
       "title": "Portable update also replaces ctrlz.exe",
