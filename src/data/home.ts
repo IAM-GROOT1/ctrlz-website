@@ -5,8 +5,8 @@
 
 export const hero = {
   eyebrow: 'Windows 10 & 11 · x64',
-  titleLead: 'Undo a',
-  titleEmphasis: 'clean install',
+  titleLead: 'undo a clean',
+  titleEmphasis: 'windows install',
   lede: 'CTRL+Z remembers the apps and browser profiles on this PC, then puts them back after you reinstall Windows.',
   primaryCta: 'Download for Windows',
   secondaryCta: { label: 'See how it works', href: '#how' },

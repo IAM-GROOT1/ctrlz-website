@@ -221,6 +221,16 @@
     letter-spacing: -0.022em;
   }
 
+  /* Home hero: calm, lowercase, sans. One large statement, no ornament. */
+  .hero-title {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: clamp(2.9rem, 1.4rem + 5.6vw, 6rem);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
   .title {
     font-family: var(--font-serif);
     font-weight: 400;
