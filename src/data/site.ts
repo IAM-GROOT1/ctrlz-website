@@ -23,6 +23,7 @@ export const site = {
 export const nav = [
   { href: '/download', label: 'Download' },
   { href: '/changelog', label: 'Changelog' },
+  { href: '/roadmap', label: 'Roadmap' },
   { href: '/docs', label: 'Docs' },
 ] as const;
 
@@ -32,6 +33,7 @@ export const footerNav = [
     links: [
       { href: '/download', label: 'Download' },
       { href: '/changelog', label: 'Changelog' },
+      { href: '/roadmap', label: "What's coming" },
       { href: '/docs', label: 'Docs' },
     ],
   },
