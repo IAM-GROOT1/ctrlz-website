@@ -27,7 +27,7 @@ const jsonLd = {
   applicationCategory: 'UtilitiesApplication',
   operatingSystem: 'Windows 10, Windows 11',
   isAccessibleForFree: true,
-  license: 'https://opensource.org/license/mit',
+  license: 'https://www.gnu.org/licenses/agpl-3.0.html',
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   sameAs: [site.repo],
   ...(version
@@ -42,27 +42,19 @@ const jsonLd = {
 <Base>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
   <!-- Hero ------------------------------------------------------------------>
-  <section class="relative overflow-hidden">
-    <div
-      class="pointer-events-none absolute inset-0 -z-10"
-      style="background: radial-gradient(62% 52% at 74% 4%, rgba(206, 82, 40, 0.11), transparent 68%)"
-      aria-hidden="true"
-    ></div>
-
-    <div class="wrap grid gap-12 pt-12 pb-16 lg:grid-cols-12 lg:items-center lg:gap-10 lg:pt-20 lg:pb-24">
-      <div class="lg:col-span-5">
-        <p class="eyebrow flex items-center gap-2.5">
-          <span class="inline-block size-1.5 rounded-full bg-accent" aria-hidden="true"></span>
+  <section>
+    <div class="wrap pt-14 pb-16 lg:pt-24 lg:pb-24">
+      <div class="max-w-3xl">
+        <p class="eyebrow">
           {hero.eyebrow}
+          {version ? ` · v${version.version}` : ''}
         </p>
 
-        <h1 class="display mt-6">
-          {hero.titleLead}
-          <br />
-          <em class="italic text-accent">{hero.titleEmphasis}.</em>
+        <h1 class="hero-title mt-6">
+          {hero.titleLead} <span class="text-accent">{hero.titleEmphasis}</span>.
         </h1>
 
-        <p class="lede mt-6 max-w-md">{hero.lede}</p>
+        <p class="lede mt-6 max-w-xl">{hero.lede}</p>
 
         <div class="mt-9">
           <DownloadCta />
@@ -109,7 +101,7 @@ const jsonLd = {
         </ul>
       </div>
 
-      <div class="lg:col-span-7 lg:pl-4">
+      <div class="mt-14 lg:mt-20">
         <Screenshot
           name={screenshotSlots[0].name}
           label={screenshotSlots[0].label}
@@ -118,7 +110,7 @@ const jsonLd = {
           height={screenshotSlots[0].height}
           theme={screenshotSlots[0].theme}
           priority
-          sizes="(min-width: 1280px) 700px, (min-width: 1024px) 58vw, 100vw"
+          sizes="(min-width: 1280px) 1100px, 100vw"
         />
       </div>
     </div>
