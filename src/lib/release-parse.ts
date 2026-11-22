@@ -139,3 +139,66 @@ export function hasReleases(data: ReleaseData | null | undefined): boolean {
 export function isLastKnownRelease(data: ReleaseData | null | undefined): boolean {
   return hasReleases(data) && data?.source === 'cache';
 }
+
+const COMMIT_SECTIONS: Record<string, string> = {
+  feat: 'New',
+  fix: 'Fixed',
+  perf: 'Improved',
+  refactor: 'Improved',
+};
+const SECTION_ORDER = ['New', 'Improved', 'Fixed'];
+
+const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
+
+/**
+ * Release notes generated from `git log` look like
+ *   "## Changes since v1.3.0\n- fix(update): … (8af0746)\n- Merge pull request …"
+ * and can arrive with the newlines flattened to spaces. Returns null when the
+ * body is not that shape, so hand-written notes are left alone.
+ */
+function commitListFromBody(body: string): string[] | null {
+  const match =
+    /^\s*#{1,3}\s+(?:Changes since\s+\S+|All changes)\s*(.*?)(?=\s#{1,3}\s+Downloads\b|$)/is.exec(
+      body.replace(/^\s*#\s+[^\n]*?(?=\s+##\s)/, ''),
+    );
+  if (!match) return null;
+  const list = match[1].trim();
+  if (!list.startsWith('-')) return null;
+  return list
+    .split(/\s*\n\s*-\s+|\s+-\s+(?=Merge\b|[a-z]+(?:\([^)]*\))?!?:\s)/)
+    .map((item) => item.replace(/^-\s+/, '').trim())
+    .filter(Boolean);
+}
+
+/**
+ * Markdown for the changelog page. Commit-list notes are turned into
+ * New / Improved / Fixed sections (merges, tests, CI and chores dropped);
+ * anything else just loses its leading title heading.
+ */
+export function formatReleaseNotes(body: string): string {
+  const text = body ?? '';
+  const commits = commitListFromBody(text);
+  if (!commits) return text.replace(/^\s*#{1,3}\s+[^\n]*\n+/, '');
+
+  const sections = new Map<string, string[]>();
+  for (const commit of commits) {
+    const subject = commit.replace(/\s*\([0-9a-f]{7,40}\)\s*$/i, '');
+    const parsed = /^([a-z]+)(?:\(([^)]*)\))?!?:\s+(.+)$/.exec(subject);
+    const heading = parsed ? COMMIT_SECTIONS[parsed[1]] : undefined;
+    if (!parsed || !heading) continue;
+    const scope = parsed[2] ? `${capitalise(parsed[2].split(/[,/]/)[0].trim())}: ` : '';
+    const line = `${scope}${capitalise(parsed[3].trim())}`;
+    sections.set(heading, [...(sections.get(heading) ?? []), line]);
+  }
+
+  if (sections.size === 0) return '_Maintenance and internal changes only._\n';
+  return SECTION_ORDER.filter((name) => sections.has(name))
+    .map(
+      (name) =>
+        `### ${name}\n\n${sections
+          .get(name)!
+          .map((line) => `- ${line}`)
+          .join('\n')}\n`,
+    )
+    .join('\n');
+}

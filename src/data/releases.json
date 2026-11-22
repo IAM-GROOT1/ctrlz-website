@@ -1,6 +1,6 @@
 {
   "source": "github",
-  "fetchedAt": "2026-11-22T13:17:08.381Z",
+  "fetchedAt": "2026-11-22T19:44:38.323Z",
   "repo": "IAM-GROOT1/ctrlz",
   "releases": [
     {
@@ -53,7 +53,7 @@
           "digest": "sha256:4e49ad4640ffcc6e34c15c44d3e3ec7242bac61e39cb6be76c95a1bacfa91180",
           "downloadUrl": "https://github.com/IAM-GROOT1/ctrlz/releases/download/v1.3.0/CTRL%2BZ-Portable-1.3.0.exe",
           "contentType": "application/x-msdownload",
-          "downloadCount": 4
+          "downloadCount": 5
         },
         {
           "name": "CTRL+Z-Setup-1.3.0.exe",
