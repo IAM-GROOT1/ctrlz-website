@@ -137,5 +137,5 @@ export function hasReleases(data: ReleaseData | null | undefined): boolean {
  * build. The page then says "last known release" with that date instead of presenting it as current.
  */
 export function isLastKnownRelease(data: ReleaseData | null | undefined): boolean {
-  return Boolean(data && data.source === 'cache' && data.releases.length > 0);
+  return hasReleases(data) && data?.source === 'cache';
 }

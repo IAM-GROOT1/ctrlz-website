@@ -29,9 +29,7 @@ const verifyCommand = `Get-FileHash .\\${installerName} -Algorithm SHA256`;
           {version ? (
             <p class="mono mt-6 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs text-muted">
               {isLastKnown && (
-                <>
-                  <span data-last-known>Last known release, as of {fetchedLabel}:</span>
-                </>
+                <span data-last-known>Last known release, as of {fetchedLabel}:</span>
               )}
               <span data-release-version>v{version.version}</span>
               <span aria-hidden="true">·</span>

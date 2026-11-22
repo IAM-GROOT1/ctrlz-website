@@ -54,7 +54,17 @@ async function readCache() {
  */
 async function markCached(cached) {
   if (cached.source === 'cache') return;
-  await writeFile(OUT_FILE, `${JSON.stringify({ ...cached, source: 'cache' }, null, 2)}\n`, 'utf8');
+  try {
+    await writeFile(
+      OUT_FILE,
+      `${JSON.stringify({ ...cached, source: 'cache' }, null, 2)}\n`,
+      'utf8',
+    );
+  } catch (error) {
+    // Never fail the build over a label: the cached data is still served, just not marked.
+    const message = error instanceof Error ? error.message : String(error);
+    console.warn(`[releases] could not mark the cached data as last known: ${message}`);
+  }
 }
 
 async function fetchReleases(attempt = 1) {
