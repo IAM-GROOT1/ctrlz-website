@@ -1,0 +1,97 @@
+name: Deploy
+
+# Builds the site and uploads it to Cloudflare Pages (ctrlz.download).
+#
+# The Pages project is not connected to this repository, so nothing deploys unless this workflow
+# runs. It runs on every push to main, on demand, and every 15 minutes. A scheduled run deploys
+# only when something changed: this site, the app's main branch (new merged changes for the
+# changelog), the app's latest release (download links) or its roadmap.
+#
+# Needs two repository secrets: CLOUDFLARE_API_TOKEN (Pages: Edit permission) and
+# CLOUDFLARE_ACCOUNT_ID. Optional repository variable CLOUDFLARE_PAGES_PROJECT (default
+# "ctrlz-website"). Without the secrets the site still builds and the run says why it did not
+# deploy.
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Work out what the live site shows
+        id: state
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          app_main=$(gh api repos/IAM-GROOT1/ctrlz/commits/main --jq .sha)
+          release=$(gh api 'repos/IAM-GROOT1/ctrlz/releases?per_page=10' --jq '[.[] | select(.draft | not)][0].tag_name // "none"')
+          roadmap=$(gh api repos/IAM-GROOT1/ctrlz/contents/ROADMAP.md --jq .sha)
+          fingerprint="site=${GITHUB_SHA} app=${app_main} release=${release} roadmap=${roadmap}"
+          live=$(curl -fsS --max-time 10 https://ctrlz.download/build.txt || true)
+          echo "fingerprint=${fingerprint}" >> "$GITHUB_OUTPUT"
+          if [ "$EVENT" = "schedule" ] && [ "$live" = "$fingerprint" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "The live site is current (${fingerprint}); nothing to deploy."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            echo "Live: '${live:-unknown}'. Building: ${fingerprint}"
+          fi
+
+      - name: Check out
+        if: steps.state.outputs.skip != 'true'
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        if: steps.state.outputs.skip != 'true'
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node
+        if: steps.state.outputs.skip != 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install dependencies
+        if: steps.state.outputs.skip != 'true'
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        if: steps.state.outputs.skip != 'true'
+        run: pnpm build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Stamp the build
+        if: steps.state.outputs.skip != 'true'
+        env:
+          FINGERPRINT: ${{ steps.state.outputs.fingerprint }}
+        run: printf '%s' "$FINGERPRINT" > dist/build.txt
+
+      - name: Deploy to Cloudflare Pages
+        if: steps.state.outputs.skip != 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT || 'ctrlz-website' }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::warning::Not deployed: set the CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID repository secrets (see docs/DEPLOYMENT.md)."
+            exit 0
+          fi
+          npx --yes wrangler@4.20.0 pages deploy dist --project-name "$PROJECT" --branch main --commit-dirty=true

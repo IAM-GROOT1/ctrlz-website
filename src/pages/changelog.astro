@@ -4,6 +4,17 @@ import { marked } from 'marked';
 import { formatDate } from '../lib/release-parse';
 import { fetchedLabel, releases } from '../lib/releases';
 import { site } from '../data/site';
+import updatesJson from '../data/updates.json';
+
+// Changes merged into the app's main branch since the latest release (public pull requests).
+const updates = updatesJson as {
+  since: { tag: string; publishedAt: string } | null;
+  items: { number: number; title: string; url: string; mergedAt: string }[];
+};
+const inProgress = (updates.items ?? []).map((item) => ({
+  ...item,
+  date: formatDate(item.mergedAt),
+}));
 
 const entries = releases.slice(0, 30).map((release) => {
   // The release body usually repeats the release title as its first heading.
@@ -37,6 +48,39 @@ const entries = releases.slice(0, 30).map((release) => {
       </p>
     </div>
   </section>
+
+  {inProgress.length > 0 && (
+    <section class="wrap" aria-label="In progress">
+      <article class="grid gap-6 border-t border-line py-12 lg:grid-cols-12 lg:gap-10">
+        <div class="lg:col-span-3">
+          <h2 class="font-serif text-[2rem] leading-none tracking-[-0.02em]">Next</h2>
+          <p class="mono mt-3 text-xs text-muted">
+            in progress{updates.since ? ` since ${updates.since.tag}` : ''}
+          </p>
+        </div>
+        <div class="lg:col-span-8 lg:col-start-5">
+          <p class="text-[0.9375rem] font-medium text-ink">
+            Merged into the main branch, not released yet
+          </p>
+          <ul class="mt-4 space-y-2 text-sm leading-relaxed text-muted">
+            {inProgress.map((item) => (
+              <li>
+                <a class="link text-ink" href={item.url} rel="noopener noreferrer">
+                  {item.title}
+                </a>{' '}
+                <span class="mono text-xs">
+                  #{item.number} · {item.date}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p class="mt-4 text-xs text-muted">
+            These ship in the next release. Downloads always point to the latest release.
+          </p>
+        </div>
+      </article>
+    </section>
+  )}
 
   {entries.length > 0 ? (
     <section class="wrap pb-20" aria-label="Releases">
